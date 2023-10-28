@@ -1,9 +1,8 @@
 const express = require("express");
-const fs = require("fs");
-
 const app = express();
-const port = 3000;
+const yt = require("yt-converter");
 
+const port = 80;
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
@@ -11,36 +10,31 @@ app.get("/", (req, res) => {
 });
 
 function onData() {
-  console.log("yükleniyor");
+  console.log("Downloading 👻");
 }
 
 function onClose() {
-  console.log("yüklenme tamam");
+  console.log("Downloaded 🟩");
 }
 
 app.post("/save", (req, res) => {
   const url = req.body.title;
 
-  const yt = require("yt-converter");
-
-  try {
-    yt.convertAudio(
-      {
-        url: url,
-        itag: 141,
-        directoryDownload: __dirname,
-        title: "Your title here",
-      },
-      onData,
-      onClose
-    );
-  } catch (error) {
-    console.log(`ERROR: ${error.message}`);
-  }
-
-  res.send("Başlık kaydedildi.");
+  yt.convertAudio(
+    {
+      url: url,
+      itag: 141,
+      directoryDownload: __dirname + "/music/",
+    },
+    onData,
+    onClose
+  );
+console.log(__dirname);
+  res.send("MP3 saved");
 });
 
 app.listen(port, () => {
-  console.log(`Uygulama http://localhost:${port} adresinde çalışıyor.`);
+  console.log(`App is running on : http://localhost:${port}`);
 });
+
+// url: "https://youtu.be/8Hi4G5nNnQM?list=RD8Hi4G5nNnQM",
