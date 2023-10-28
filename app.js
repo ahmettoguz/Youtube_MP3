@@ -3,7 +3,6 @@ const fs = require("fs");
 
 const app = express();
 const port = 3000;
-let fileName;
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -11,12 +10,33 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/save", (req, res) => {
-  const title = req.body.title;
-  fileName = title;
-  console.log(req);
+function onData() {
+  console.log("yükleniyor");
+}
 
-  fs.writeFileSync(fileName, title);
+function onClose() {
+  console.log("yüklenme tamam");
+}
+
+app.post("/save", (req, res) => {
+  const url = req.body.title;
+
+  const yt = require("yt-converter");
+
+  try {
+    yt.convertAudio(
+      {
+        url: url,
+        itag: 141,
+        directoryDownload: __dirname,
+        title: "Your title here",
+      },
+      onData,
+      onClose
+    );
+  } catch (error) {
+    console.log(`ERROR: ${error.message}`);
+  }
 
   res.send("Başlık kaydedildi.");
 });
