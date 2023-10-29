@@ -1,48 +1,71 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
+const yt = require("yt-converter");
+
+const FunctionClass = require("./src/js/functions.js");
+const functions = new FunctionClass();
 
 const port = 80;
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
+// function getInfo(url) {
+//   yt.getInfo(url).then((info) => {
+//     return {
+//       songName: info.title,
+//       imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
+//       songLength: functions.formatTime(info.lengthSeconds),
+//     };
+//   });
+// }
+
+function getInfo(url) {
+  return yt.getInfo(url).then((info) => {
+    return {
+      songName: info.title,
+      imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
+      songLength: functions.formatTime(info.lengthSeconds),
+    };
+  });
+}
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  getInfo("https://youtu.be/shr16M_1qu8?list=LL")
+    .then((inf) => {
+      console.log(inf);
+      res.sendFile(__dirname + "/index.html");
+    })
+    .catch((error) => {
+      console.error("Error handling request:", error);
+      res.status(500).send("An error occurred.");
+    });
+
 });
 
-function onData() {
-  console.log("Downloading 👻");
-}
+// app.get("/", (req, res) => {
+//   const inf = getInfo("https://youtu.be/shr16M_1qu8?list=LL");
 
-function onClose() {
-  console.log("Downloaded 🟩");
-}
-
-function dow() {}
+//   setInterval(() => {
+//     console.log(inf);
+//   }, 1000);
+//   res.sendFile(__dirname + "/index.html");
+// });
 
 app.get("/api/save", (req, res) => {
   const url = req.body.title;
-  
   res.download("./music/TGC - Dreamers (Embody Remix).mp3");
 });
 
-app.post("/save", (req, res) => {
+app.get("/save", (req, res) => {
   const url = req.body.title;
 
-  // yt.convertAudio(
-  //   {
-  //     url: url,
-  //     itag: 141,
-  //     directoryDownload: __dirname + "/music/",
-  //   },
-  //   onData,
-  //   onClose
-  // );
+  ytdl("http://www.youtube.com/watch?v=A02s8omM_hI").pipe(
+    fs.createWriteStream("video.flv")
+  );
 
-  res.download("./music/TGC - Dreamers (Embody Remix).mp3");
-
-  res.send("MP3 saved");
+  res.send("MP3 servera yüklendi");
 });
 
 app.get("/indir", (req, res) => {
