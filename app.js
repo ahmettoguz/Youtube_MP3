@@ -3,7 +3,9 @@ const app = express();
 const yt = require("yt-converter");
 
 const port = 80;
+
 app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
@@ -29,7 +31,7 @@ app.post("/save", (req, res) => {
     onData,
     onClose
   );
-console.log(__dirname);
+  console.log(__dirname);
   res.send("MP3 saved");
 });
 
