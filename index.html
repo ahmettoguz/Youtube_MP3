@@ -88,7 +88,43 @@
       </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#titleForm").submit(function (e) {
+          e.preventDefault(); // Form gönderimini durdurun
+
+          // Form verilerini alın
+          const formData = $("#titleForm").serialize();
+
+          // API'ya istek gönderilmeden önce bu işlev çalışacak
+          $.ajax({
+            type: "GET", // veya diğer HTTP metotları
+            url: "/api/save", // API'nızın URL'sini buraya ekleyin
+            data: formData, // Form verilerini isteğe ekleyin
+            beforeSend: function () {
+              // İstek gönderilmeden önce yapılacak işlemler burada olur
+              // Örneğin, bekleme simgesi gösterme veya butonu devre dışı bırakma gibi işlemler
+              // $("#titleForm button[type='submit']").prop("disabled", true); // Butonu devre dışı bırak
+            },
+            success: function (data) {
+              // İstek başarılıysa burada işlem yapabilirsiniz
+              console.log("İstek başarılı: " + data);
+              window.location.href = "/api/save";
+            },
+            error: function (xhr, status, error) {
+              // İstek başarısızsa burada işlem yapabilirsiniz
+              console.error("İstek başarısız: " + error);
+            },
+            complete: function () {
+              // İstek tamamlandığında yapılacak işlemler burada olur
+              // $("#titleForm button[type='submit']").prop("disabled", false); // Butonu etkinleştir
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>
