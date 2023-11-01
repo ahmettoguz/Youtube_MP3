@@ -32,8 +32,10 @@ function getInfo(url) {
 }
 
 app.get("/", (req, res) => {
-  getInfo("https://youtu.be/shr16M_1qu8?list=LL")
-    .then((inf) => {
+  const getInfoPromise = getInfo("https://youtu.be/shr16M_1qu8?list=LL");
+
+  Promise.all([getInfoPromise])
+    .then(([inf]) => {
       console.log(inf);
       res.sendFile(__dirname + "/index.html");
     })
@@ -42,6 +44,21 @@ app.get("/", (req, res) => {
       res.status(500).send("An error occurred.");
     });
 
+  console.log("promisi beklemeli");
+});
+
+app.get("/getInfo", (req, res) => {
+  const url = req.query.url;
+  return getInfo(url);
+
+  // https://youtu.be/shr16M_1qu8?list=LL
+  // getInfo(url)
+  //   .then(function (r) {
+  //     console.log(r);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error handling request:", error);
+  //   });
 });
 
 // app.get("/", (req, res) => {
