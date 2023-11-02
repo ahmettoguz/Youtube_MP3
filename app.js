@@ -1,38 +1,27 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
-const yt = require("yt-converter");
 
-const FunctionClass = require("./src/js/functions.js");
-const functions = new FunctionClass();
+const appService = require("./src/js/service.js");
 
 const port = 80;
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("Content-Type", "application/json");
+  next(); // Bir sonraki middleware işlevini çağır
+});
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
-// function getInfo(url) {
-//   yt.getInfo(url).then((info) => {
-//     return {
-//       songName: info.title,
-//       imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
-//       songLength: functions.formatTime(info.lengthSeconds),
-//     };
-//   });
-// }
-
-function getInfo(url) {
-  return yt.getInfo(url).then((info) => {
-    return {
-      songName: info.title,
-      imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
-      songLength: functions.formatTime(info.lengthSeconds),
-    };
-  });
-}
-
+// ----------------------------------------------------------------------------
 app.get("/", (req, res) => {
-  const getInfoPromise = getInfo("https://youtu.be/shr16M_1qu8?list=LL");
+  const getInfoPromise = getUrlInfo("https://youtu.be/shr16M_1qu8?list=LL");
 
   Promise.all([getInfoPromise])
     .then(([inf]) => {
@@ -47,28 +36,11 @@ app.get("/", (req, res) => {
   console.log("promisi beklemeli");
 });
 
-app.get("/getInfo", (req, res) => {
+app.get("/getUrlInfo", (req, res) => {
   const url = req.query.url;
-  return getInfo(url);
-
-  // https://youtu.be/shr16M_1qu8?list=LL
-  // getInfo(url)
-  //   .then(function (r) {
-  //     console.log(r);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error handling request:", error);
-  //   });
+  const data = appService.getUrlInfo(url);
+  res.status(200).json(data);
 });
-
-// app.get("/", (req, res) => {
-//   const inf = getInfo("https://youtu.be/shr16M_1qu8?list=LL");
-
-//   setInterval(() => {
-//     console.log(inf);
-//   }, 1000);
-//   res.sendFile(__dirname + "/index.html");
-// });
 
 app.get("/api/save", (req, res) => {
   const url = req.body.title;

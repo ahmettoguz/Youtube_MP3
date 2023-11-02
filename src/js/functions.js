@@ -22,4 +22,5 @@ class FunctionClass {
   }
 }
 
-module.exports = FunctionClass;
+const functions = new FunctionClass();
+module.exports = functions;
