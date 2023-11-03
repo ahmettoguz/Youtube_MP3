@@ -8,10 +8,8 @@ const port = 80;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Content-Type", "application/json");
   next(); // Bir sonraki middleware işlevini çağır
 });
@@ -21,7 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // ----------------------------------------------------------------------------
 app.get("/", (req, res) => {
-  const getInfoPromise = getUrlInfo("https://youtu.be/shr16M_1qu8?list=LL");
+  const getInfoPromise = appService.getUrlInfo(
+    "https://youtu.be/shr16M_1qu8?list=LL"
+  );
 
   Promise.all([getInfoPromise])
     .then(([inf]) => {
@@ -36,9 +36,9 @@ app.get("/", (req, res) => {
   console.log("promisi beklemeli");
 });
 
-app.get("/getUrlInfo", (req, res) => {
+app.get("/getUrlInfo", async (req, res) => {
   const url = req.query.url;
-  const data = appService.getUrlInfo(url);
+  const data = await appService.getUrlInfo(url);
   res.status(200).json(data);
 });
 
