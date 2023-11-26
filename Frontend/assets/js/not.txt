@@ -1,0 +1,121 @@
+
+https://vuejs.org/guide/quick-start.html
+------------------------------------------------------------
+
+Cdn:
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+------------------------------------------------------------
+
+Vs Code: 
+    Vue 3 Snippets
+------------------------------------------------------------
+
+Create app with:
+    Vue.createApp
+------------------------------------------------------------
+
+Data:
+    in data function you will keep variables
+------------------------------------------------------------
+
+Methods:
+    write methods in that section
+    everytime it runs
+------------------------------------------------------------
+
+Computed:
+    write methods in that section
+    if the dependency of that method is changed, that method will run
+------------------------------------------------------------
+
+Watch: 
+    Is a function that when the corresponding name with data changed this function is called.
+------------------------------------------------------------
+
+Using variable: 
+    <div> Result: {{counter}} </div>
+
+    <li v-for="task in tasks"> {{task}} </li>
+------------------------------------------------------------
+v-bind:
+    used because in some cases you need to instert attribute
+    v-bind:href="linkUrl"
+    :href="linkUrl"
+
+------------------------------------------------------------
+
+Call function on click:
+    v-on:click="addTask"
+    @click="addTask"
+------------------------------------------------------------
+
+Events with modifiers:
+    v-on:click="addTask"
+    v-on:click="counter = counter + 1"
+    v-on:click="decrement(5)"
+    v-on:input="displayName"
+    v-on:click.prevent.right="rightClick"
+    v-on:click.left="leftClick"
+    v-on:submit.prevent="submitForm"
+    v-on:keyup.enter="enterKey"
+
+    add stop modifier to top element so that bottom ones will not triggered.
+    @click.stop 
+
+------------------------------------------------------------
+
+Dynamic Class:
+    Give html class with computed by vbind
+        :class="{computedMethod}"
+
+    Firstly give button to onclik:
+        @click="toggleClassComputed()"
+
+        in this methods you can change the boolean value of isActiveClass
+    
+    By the change of the variable computed method will be triggered and return this:
+        return {"bg-danger": this.isActiveClass,"text-white": this.isActiveClass,};
+------------------------------------------------------------
+
+Conditional Dispaly:
+    if else:
+        There should be no other element between the elements.
+
+        <h3 v-if="tasks.length === 0" class="text-center mt-2">Todo List is empty</h3>
+            <ul v-else>
+                <li></li>
+        or 
+        
+        <h3 v-if="tasks.length === 0" class="text-center mt-2">Todo List is empty</h3>
+            <ul v-else-if="condition">
+                <li></li>
+
+    v-show:
+        add display none to css its performence is better because not deleting and adding element
+        v-show="tasks.length !== 0"
+------------------------------------------------------------
+Loop:
+
+v-for:
+    array:
+        tasks is a data attribute as array.
+        :key is used in some cases in frontend (for example when we remove elemnt its not deleting all the elements it shifts. Not to get problem we use.)
+        
+        <li v-for="(task, index) in tasks" :key="task">
+            {{index}}. {{task}}
+        </li>
+
+        To delete:
+        <button @click="removeTask(index)" class="btn btn-outline-danger">
+        this.tasks.splice(index, 1);
+
+    object attribute:
+        <li v-for="(value, key, index) in {name: 'ahmet', age: '23'}">
+            {{index}}. {{key}} : {{value}}
+        </li>
+
+    numbers:
+        <li v-for="number in 10">
+            {{number}}
+        </li>
+------------------------------------------------------------
