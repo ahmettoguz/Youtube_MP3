@@ -42,7 +42,7 @@ Vue.createApp({
 
         console.log(data.songName);
         this.videoSongName = data.songName;
-        this.videoSingerName = data.songName;
+        this.videoSingerName = data.singerName;
         this.videoLenght = data.songLength;
 
         // display label for input field
