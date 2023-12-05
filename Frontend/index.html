@@ -20,9 +20,6 @@
     ></script>
     <!-- JQuery End -->
 
-    <!-- Vue Js -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Vue Js End -->
     <title>Youtube Mp3</title>
   </head>
   <body>
@@ -42,7 +39,11 @@
                 />
               </div>
               <div class="col-3 col-lg-2">
-                <button class="btn btn-outline-primary" type="submit">
+                <button
+                  class="btn btn-outline-primary"
+                  type="submit"
+                  @:click="findMusic"
+                >
                   Upload
                 </button>
               </div>
@@ -51,11 +52,10 @@
 
           <!-- Founded song part -->
           <div
-            v-show="displayFoundedSong == true"
+            v-show="displayFoundedSong"
             class="row mt-5 p-3 bg-body-secondary border border-dark rounded shadow-sm"
           >
             <div class="col-8">
-              {{displayFoundedSong}}
               <h4>Song Name</h4>
               <p class="ms-2">Ahmet Oğuz Ergin</p>
 
@@ -77,8 +77,12 @@
       </div>
     </div>
 
+    <!-- Vue Js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Vue Js End -->
+
     <!-- js -->
-    <script src="./script.js"></script>
+    <script src="./assets/script/script.js"></script>
     <!-- js end -->
   </body>
 </html>
