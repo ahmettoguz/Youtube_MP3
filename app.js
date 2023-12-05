@@ -3,6 +3,7 @@ const app = express();
 const fs = require("fs");
 
 const appService = require("./src/js/service.js");
+const expressHelper = require("./src/js/expressHelper.js");
 
 const port = 80;
 
@@ -37,10 +38,20 @@ app.get("/", (req, res) => {
   console.log("promisi beklemeli");
 });
 
-app.get("/getUrlInfo", async (req, res) => {
-  const url = req.query.url;
-  const data = await appService.getUrlInfo(url);
-  res.status(200).json(data);
+app.post("/getUrlInfo", async (req, res) => {
+  const url = req.body.url;
+  const data = await appService.getUrlInfo(url, res);
+
+  // check result
+  if (data.status === false) {
+    return expressHelper.returnFailMessage(res, 400, data.errorMessage);
+  }
+
+  return expressHelper.returnSuccessMessage(
+    res,
+    "Video information found.",
+    data
+  );
 });
 
 app.get("/api/save", (req, res) => {

@@ -9,10 +9,31 @@ Vue.createApp({
     };
   },
   methods: {
-    findMusic(e) {
-      e.preventDefault();
+    async findMusic(e) {
+      let videoUrl = $("#videoUrl").val();
+      videoUrl: "https://youtu.be/shr16M_1qu8?list=LL";
 
-      if (1) this.displayFoundedSong = true;
+      const response = await new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${this.serverUrl}/getUrlInfo`,
+          type: "POST",
+          data: {
+            url: videoUrl,
+          },
+          success: function (data) {
+            console.log("success");
+            resolve(data);
+          },
+          error: function (error) {
+            console.log("fail");
+            reject(error);
+          },
+        });
+      });
+
+      console.log("Reposnse: ", response);
+
+      if (response) this.displayFoundedSong = true;
     },
   },
 }).mount(".container");
