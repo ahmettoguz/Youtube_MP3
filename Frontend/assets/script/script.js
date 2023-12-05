@@ -3,6 +3,9 @@
 Vue.createApp({
   data() {
     return {
+      videoSongName: "",
+      videoSingerName: "",
+      videoLenght: 0,
       displayFoundedSong: false,
       serverUrl: "http://localhost",
       // serverUrl : "http://159.203.81.11"
@@ -10,30 +13,44 @@ Vue.createApp({
   },
   methods: {
     async findMusic(e) {
-      let videoUrl = $("#videoUrl").val();
-      videoUrl: "https://youtu.be/shr16M_1qu8?list=LL";
+      let videoUrlInput = $("#videoUrlInput").val();
+      videoUrlInput: "https://youtu.be/shr16M_1qu8?list=LL";
+
+      // remove previous information labels for input field
+      $("#videoUrlInput").removeClass("is-valid");
+      $("#videoUrlInput").removeClass("is-invalid");
 
       const response = await new Promise((resolve, reject) => {
         $.ajax({
           url: `${this.serverUrl}/getUrlInfo`,
           type: "POST",
           data: {
-            url: videoUrl,
+            url: videoUrlInput,
           },
           success: function (data) {
-            console.log("success");
-            resolve(data);
+            resolve({ status: true, data: data });
           },
           error: function (error) {
-            console.log("fail");
-            reject(error);
+            resolve({ status: false });
           },
         });
       });
 
-      console.log("Reposnse: ", response);
+      if (response.status) {
+        const data = response.data.data;
+        this.displayFoundedSong = true;
 
-      if (response) this.displayFoundedSong = true;
+        console.log(data.songName);
+        this.videoSongName = data.songName;
+        this.videoSingerName = data.songName;
+        this.videoLenght = data.songLength;
+
+        // display label for input field
+        $("#videoUrlInput").addClass("is-valid");
+      } else {
+        // display label for input field
+        $("#videoUrlInput").addClass("is-invalid");
+      }
     },
   },
 }).mount(".container");
