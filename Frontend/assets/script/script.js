@@ -3,6 +3,9 @@
 Vue.createApp({
   data() {
     return {
+      // videoBanner:
+      //   "https://i.ytimg.com/vi_webp/9FFufON_KUA/maxresdefault.webp?v=618c7fdd",
+      videoBanner: "",
       videoSongName: "",
       videoSingerName: "",
       videoLenght: 0,
@@ -40,7 +43,7 @@ Vue.createApp({
         const data = response.data.data;
         this.displayFoundedSong = true;
 
-        console.log(data.songName);
+        this.videoBanner = data.imgUrl;
         this.videoSongName = data.songName;
         this.videoSingerName = data.singerName;
         this.videoLenght = data.songLength;
