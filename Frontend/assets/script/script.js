@@ -9,7 +9,7 @@ Vue.createApp({
       videoSongName: "",
       videoSingerName: "",
       videoLenght: 0,
-      displayFoundedSong: false,
+      displayFoundedSong: true,
       serverUrl: "http://localhost",
       // serverUrl : "http://159.203.81.11"
     };

@@ -22,7 +22,7 @@
 
     <title>Youtube Mp3</title>
   </head>
-  <body>
+  <body data-bs-theme="light">
     <div class="container mt-5">
       <h1 class="mb-4 text-center">Youtube MP3 Downloader</h1>
 
@@ -44,7 +44,7 @@
                 <button
                   class="btn btn-outline-primary"
                   type="submit"
-                  @:click.prevent="findMusic"
+                  @click.prevent="findMusic"
                 >
                   Upload
                 </button>
@@ -73,6 +73,18 @@
                 :src="videoBanner"
                 alt=""
               />
+            </div>
+            <div class="row">
+              <hr />
+              <div class="col12 d-flex justify-content-center">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  @click="convertMusic"
+                >
+                  Convert
+                </button>
+              </div>
             </div>
           </div>
         </div>
