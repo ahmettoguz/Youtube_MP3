@@ -8,7 +8,7 @@ Vue.createApp({
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
-      displayFoundedSong: true,
+      stage: "search",
       serverUrl: "http://localhost",
       // serverUrl : "http://159.203.81.11"
     };
@@ -40,7 +40,9 @@ Vue.createApp({
 
       if (response.status) {
         const data = response.data.data;
-        this.displayFoundedSong = true;
+
+        // change stage to display found music part
+        this.stage = "videoFound";
 
         this.videoBanner = data.imgUrl;
         this.videoSongName = data.songName;
@@ -52,6 +54,10 @@ Vue.createApp({
         // display label for input field
         $("#videoUrlInput").addClass("is-invalid");
       }
+    },
+
+    async convertMusic() {
+      alert(1);
     },
   },
 }).mount(".container");
