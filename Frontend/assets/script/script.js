@@ -7,8 +7,7 @@ Vue.createApp({
       //   "https://i.ytimg.com/vi_webp/9FFufON_KUA/maxresdefault.webp?v=618c7fdd",
       videoBanner: "",
       videoSongName: "",
-      videoSingerName: "",
-      videoLenght: 0,
+      videoLenght: null,
       displayFoundedSong: true,
       serverUrl: "http://localhost",
       // serverUrl : "http://159.203.81.11"
@@ -45,7 +44,6 @@ Vue.createApp({
 
         this.videoBanner = data.imgUrl;
         this.videoSongName = data.songName;
-        this.videoSingerName = data.singerName;
         this.videoLenght = data.songLength;
 
         // display label for input field
