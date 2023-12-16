@@ -3,7 +3,7 @@ const app = express();
 const fs = require("fs");
 
 const appService = require("./src/js/service.js");
-const expressHelper = require("./src/js/expressHelper.js");
+const expressService = require("./src/js/expressService.js");
 
 const port = 80;
 
@@ -44,11 +44,12 @@ app.post("/getUrlInfo", async (req, res) => {
 
   // check result
   if (data.status === false) {
-    return expressHelper.returnFailMessage(res, 400, data.errorMessage);
+    return expressService.returnResponse(res, 400, data.errorMessage);
   }
 
-  return expressHelper.returnSuccessMessage(
+  return expressService.returnResponse(
     res,
+    200,
     "Video information found.",
     data
   );
