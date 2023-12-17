@@ -1,24 +1,24 @@
 class FunctionClass {
-  formatTime(saniye) {
-    const saat = Math.floor(saniye / 3600);
-    const dakika = Math.floor((saniye % 3600) / 60);
-    const kalanSaniye = saniye % 60;
+  formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
 
-    let sonuc = "";
+    let result = "";
 
-    if (saat > 0) {
-      sonuc += `${saat} saat `;
+    if (hours > 0) {
+      result += `${hours} hours `;
     }
 
-    if (dakika > 0) {
-      sonuc += `${dakika} dakika `;
+    if (minutes > 0) {
+      result += `${minutes} minutes `;
     }
 
-    if (kalanSaniye > 0 || sonuc === "") {
-      sonuc += `${kalanSaniye} saniye`;
+    if (remainingSeconds > 0 || result === "") {
+      result += `${remainingSeconds} seconds`;
     }
 
-    return sonuc.trim();
+    return result.trim();
   }
 }
 
