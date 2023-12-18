@@ -3,8 +3,8 @@ bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
 
-const appService = require("./src/js/service.js");
-const expressService = require("./src/js/expressService.js");
+const appService = require("./src/service/ytService.js");
+const expressService = require("./src/service/expressService.js");
 
 const port = 80;
 

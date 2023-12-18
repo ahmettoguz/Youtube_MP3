@@ -1,4 +1,4 @@
-class FunctionClass {
+class CommonService {
   formatTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -22,5 +22,5 @@ class FunctionClass {
   }
 }
 
-const functions = new FunctionClass();
-module.exports = functions;
+const commonService = new CommonService();
+module.exports = commonService;

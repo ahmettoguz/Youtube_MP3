@@ -9,14 +9,8 @@
 405 METHOD NOT ALLOWED – İzin verilmeyen HTTP yöntemi kullanıldığında bilgi vermek için kullanılır.
 409 CONFLICT – Aynı veri üzerinde birden fazla kişinin işlem yaptığını bildirmek için kullanılır.
 500 INTERNAL SERVER ERROR – Sunucuda herhangi bir hata olduğunda kullanılır.
-
-
 ------------------------
 
-status codes:
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-
------
 Informational responses (100 – 199)
 Successful responses (200 – 299)
 Redirection messages (300 – 399)

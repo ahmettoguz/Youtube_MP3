@@ -1,5 +1,8 @@
 "use strict";
 
+const serverUrl = "http://localhost";
+const apiUrl = `${serverUrl}/api`;
+
 Vue.createApp({
   data() {
     return {
@@ -9,8 +12,6 @@ Vue.createApp({
       videoSongName: "",
       videoLenght: null,
       stage: "search",
-      serverUrl: "http://localhost",
-      // serverUrl : "http://159.203.81.11"
     };
   },
   methods: {
@@ -24,8 +25,7 @@ Vue.createApp({
 
       const response = await new Promise((resolve, reject) => {
         $.ajax({
-          url: `${this.serverUrl}/getUrlInfo`,
-          // contentType: "application/json",
+          url: `${apiUrl}/getUrlInfo`,
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify({
@@ -60,27 +60,24 @@ Vue.createApp({
 
     async convertMusic() {
       console.log("converting");
+      // const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
 
-      const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
-
-      const response = await new Promise((resolve, reject) => {
-        $.ajax({
-          url: `${this.serverUrl}/getUrlInfo`,
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            url: videoUrlInput,
-          }),
-          success: function (data) {
-            resolve({ status: true, data: data });
-          },
-          error: function (error) {
-            resolve({ status: false });
-          },
-        });
-      });
-
-      console.log(response);
+      // const response = await new Promise((resolve, reject) => {
+      //   $.ajax({
+      //     url: `${this.serverUrl}/getUrlInfo`,
+      //     type: "POST",
+      //     contentType: "application/json",
+      //     data: JSON.stringify({
+      //       url: videoUrlInput,
+      //     }),
+      //     success: function (data) {
+      //       resolve({ status: true, data: data });
+      //     },
+      //     error: function (error) {
+      //       resolve({ status: false });
+      //     },
+      //   });
+      // });
     },
   },
 }).mount(".container");

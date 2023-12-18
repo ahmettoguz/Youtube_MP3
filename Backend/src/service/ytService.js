@@ -1,14 +1,14 @@
 const yt = require("yt-converter");
-const functions = require("./functions");
+const commonService = require("./commonService");
 
-class Service {
+class YtService {
   async getUrlInfo(url) {
     try {
       const info = await yt.getInfo(url);
       return {
         songName: info.title,
         imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
-        songLength: functions.formatTime(info.lengthSeconds),
+        songLength: commonService.formatTime(info.lengthSeconds),
         status: true,
       };
     } catch (error) {
@@ -17,5 +17,5 @@ class Service {
   }
 }
 
-const appService = new Service();
-module.exports = appService;
+const ytService = new YtService();
+module.exports = ytService;
