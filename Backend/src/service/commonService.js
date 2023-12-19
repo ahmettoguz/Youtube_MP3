@@ -20,6 +20,23 @@ class CommonService {
 
     return result.trim();
   }
+
+  generateRandomWord() {
+    const characters = "abcdefghijklmnopqrstuvwxyz";
+    let randomWord = "";
+
+    while (randomWord.length < 6) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      const randomChar = characters.charAt(randomIndex);
+
+      randomWord += randomChar;
+    }
+
+    // add ms
+    randomWord += "_" + String(Date.now()).slice(-5);
+
+    return randomWord;
+  }
 }
 
 const commonService = new CommonService();

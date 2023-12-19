@@ -62,22 +62,27 @@ Vue.createApp({
       console.log("converting");
       // const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
 
-      // const response = await new Promise((resolve, reject) => {
-      //   $.ajax({
-      //     url: `${this.serverUrl}/getUrlInfo`,
-      //     type: "POST",
-      //     contentType: "application/json",
-      //     data: JSON.stringify({
-      //       url: videoUrlInput,
-      //     }),
-      //     success: function (data) {
-      //       resolve({ status: true, data: data });
-      //     },
-      //     error: function (error) {
-      //       resolve({ status: false });
-      //     },
-      //   });
-      // });
+      const response = await new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${apiUrl}/convertUrl`,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            url: videoUrlInput,
+          }),
+          success: function (data) {
+            resolve({ status: true, data: data });
+          },
+          error: function (error) {
+            resolve({ status: false });
+          },
+        });
+      });
+
+      console.log(response);
     },
+  },
+  created() {
+    console.log("ahmo");
   },
 }).mount(".container");
