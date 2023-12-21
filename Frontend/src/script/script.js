@@ -7,8 +7,6 @@ const apiUrl = `${serverUrl}/api`;
 Vue.createApp({
   data() {
     return {
-      // videoBanner:
-      //   "https://i.ytimg.com/vi_webp/9FFufON_KUA/maxresdefault.webp?v=618c7fdd",
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
@@ -61,7 +59,10 @@ Vue.createApp({
 
     async convertMusic() {
       console.log("converting");
-      // const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
+      const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
+
+      // get user id to use in header part
+      const userId = localStorage.getItem("ytmp3Id");
 
       const response = await new Promise((resolve, reject) => {
         $.ajax({
@@ -71,6 +72,9 @@ Vue.createApp({
           data: JSON.stringify({
             url: videoUrlInput,
           }),
+          headers: {
+            "User-Id": userId,
+          },
           success: function (data) {
             resolve({ status: true, data: data });
           },
