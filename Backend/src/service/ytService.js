@@ -15,6 +15,27 @@ class YtService {
       return { status: false, errorMessage: "Video url info cannot resolved." };
     }
   }
+
+  onData() {
+    console.log("asf");
+  }
+
+  onCloe() {
+    console.log("finish");
+  }
+
+  async downloadToServer(url, fileName, filePath) {
+    yt.convertAudio(
+      {
+        url: url,
+        itag: 140,
+        directoryDownload: filePath,
+        title: fileName,
+      },
+      onData,
+      onClose
+    );
+  }
 }
 
 const ytService = new YtService();
