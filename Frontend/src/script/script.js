@@ -1,4 +1,5 @@
 "use strict";
+import commonService from "./commonService.js";
 
 const serverUrl = "http://localhost";
 const apiUrl = `${serverUrl}/api`;
@@ -82,7 +83,14 @@ Vue.createApp({
       console.log(response);
     },
   },
-  created() {
-    console.log("ahmo");
+  async created() {
+    // to use folder structure in backend set dummy user id to localstorage
+    const userId = commonService.generateRandomWord();
+
+    // check if it is already setted
+    const id = localStorage.getItem("ytmp3Id");
+
+    // set new one if there is no id
+    if (id == null) localStorage.setItem("ytmp3Id", userId);
   },
 }).mount(".container");
