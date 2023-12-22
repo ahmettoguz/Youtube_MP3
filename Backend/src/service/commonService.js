@@ -37,6 +37,10 @@ class CommonService {
 
     return randomWord;
   }
+
+  getHeaderValue(req, headerKey) {
+    return req.headers[headerKey];
+  }
 }
 
 const commonService = new CommonService();

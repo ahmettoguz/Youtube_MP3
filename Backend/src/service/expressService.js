@@ -18,7 +18,12 @@ class ExpressService {
 
   displayRequestInfo(req, res, next) {
     console.info(
-      `\n-------------------------\n-------------------------\nIncoming request to: ${req.url}\nMethod: ${req.method}\nIp: ${req.connection.remoteAddress}\n-------------------------\n-------------------------\n\n`
+      `\n---------------- Incoming Request ----------------\n` +
+        `Endpoint: ${req.baseUrl}${req.url}\n` +
+        `Method  : ${req.method}\n` +
+        `IP      : ${req.connection.remoteAddress}\n` +
+        `Body    : ${JSON.stringify(req.body, null, 2)}\n` +
+        `--------------------------------------------------\n\n`
     );
 
     next();

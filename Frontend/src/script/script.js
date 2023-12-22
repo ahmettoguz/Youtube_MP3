@@ -15,8 +15,7 @@ Vue.createApp({
   },
   methods: {
     async findMusic(e) {
-      let videoUrlInput = $("#videoUrlInput").val();
-      videoUrlInput: "https://youtu.be/shr16M_1qu8?list=LL";
+      const videoUrlInput = $("#videoUrlInput").val();
 
       // remove previous information labels for input field
       $("#videoUrlInput").removeClass("is-valid");
@@ -58,8 +57,7 @@ Vue.createApp({
     },
 
     async convertMusic() {
-      console.log("converting");
-      const videoUrlInput = "https://youtu.be/pCZfk1qEq0c?list=LL";
+      const videoUrlInput = $("#videoUrlInput").val();
 
       // get user id to use in header part
       const userId = localStorage.getItem("ytmp3Id");
@@ -96,5 +94,7 @@ Vue.createApp({
 
     // set new one if there is no id
     if (id == null) localStorage.setItem("ytmp3Id", userId);
+
+    // TODO CHECK SERVER STATUS AND DISPLAY ERROR IF NOT CONNECTED TO SERVER IN GET.
   },
 }).mount(".container");

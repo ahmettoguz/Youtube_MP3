@@ -2,6 +2,10 @@ const yt = require("yt-converter");
 const commonService = require("./commonService");
 
 class YtService {
+  constructor() {
+    this.downloadProgress = null;
+  }
+
   async getUrlInfo(url) {
     try {
       const info = await yt.getInfo(url);
@@ -16,25 +20,36 @@ class YtService {
     }
   }
 
-  onData() {
-    console.log("asf");
+  onConverting(data) {
+    console.log(data);
   }
 
-  onCloe() {
-    console.log("finish");
+  onCovertFinished() {
+    console.log("convert finished");
   }
 
-  async downloadToServer(url, fileName, filePath) {
-    yt.convertAudio(
+  async downloadToServer(url, filePath) {
+    const status = await yt.convertAudio(
       {
         url: url,
         itag: 140,
         directoryDownload: filePath,
-        title: fileName,
       },
-      onData,
-      onClose
+      this.onConverting,
+      this.onCovertFinished
     );
+
+    if (status != undefined) {
+      return {
+        state: true,
+        message: "Video is started to converting in server.",
+      };
+    } else {
+      return {
+        state: false,
+        message: "Video cannot converted in server!",
+      };
+    }
   }
 }
 
