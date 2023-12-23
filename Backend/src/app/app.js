@@ -12,8 +12,13 @@ const runApp = () => {
   app.use(cors());
   app.use(bodyParser.json());
 
+  // get middleware to log get request in backend
+  app.use("/", expressService.displayRequestInfo, (req, res, next) => {
+    next();
+  });
+
   // healthCheck endpoint as get
-  app.get("/", expressService.displayRequestInfo, (req, res) => {
+  app.get("/healthCheck", (req, res, next) => {
     expressService.returnResponse(res, 200, "Service is up.");
   });
 

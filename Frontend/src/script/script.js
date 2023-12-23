@@ -4,6 +4,30 @@ import commonService from "./commonService.js";
 const serverUrl = "http://localhost";
 const apiUrl = `${serverUrl}/api`;
 
+async function checkServerConnectivity() {
+  const response = await new Promise((resolve, reject) => {
+    $.ajax({
+      url: `${serverUrl}/healthCheck`,
+      type: "GET",
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      success: function (data) {
+        resolve({ status: true, data: data });
+      },
+      error: function (error) {
+        resolve({ status: false });
+      },
+    });
+  });
+
+  if (!response.status) {
+    alert("Cannot connected to server!");
+    return;
+  }
+
+  console.log("Backend server connection is successful.");
+}
+
 Vue.createApp({
   data() {
     return {
@@ -95,6 +119,7 @@ Vue.createApp({
     // set new one if there is no id
     if (id == null) localStorage.setItem("ytmp3Id", userId);
 
-    // TODO CHECK SERVER STATUS AND DISPLAY ERROR IF NOT CONNECTED TO SERVER IN GET.
+    // check backend server with get request
+    checkServerConnectivity();
   },
 }).mount(".container");
