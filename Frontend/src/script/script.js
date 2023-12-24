@@ -34,7 +34,7 @@ Vue.createApp({
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
-      stage: "search",
+      stage: "initial",
     };
   },
   methods: {
@@ -53,6 +53,9 @@ Vue.createApp({
           data: JSON.stringify({
             url: videoUrlInput,
           }),
+          beforeSend: () => {
+            this.stage = "searchingVideo";
+          },
           success: function (data) {
             resolve({ status: true, data: data });
           },
@@ -106,7 +109,34 @@ Vue.createApp({
         });
       });
 
-      console.log(response);
+      if (response.status == true) {
+        this.stage = "converting";
+        console.log(response);
+      }
+    },
+  },
+
+  computed: {
+    foundedSongClass() {
+      return {
+        "opacity-100":
+          this.stage === "videoFound" || this.stage === "converting",
+        invisible: this.stage !== "videoFound" && this.stage !== "converting",
+        "p-3": this.stage === "videoFound" || this.stage === "converting",
+      };
+    },
+
+    foundedSongStyle() {
+      return {
+        left:
+          this.stage === "videoFound" || this.stage === "converting"
+            ? "0px"
+            : "-50px",
+        height:
+          this.stage != "videoFound" && this.stage !== "converting"
+            ? "0px"
+            : "auto",
+      };
     },
   },
   async created() {
