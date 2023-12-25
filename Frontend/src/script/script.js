@@ -7,7 +7,7 @@ const apiUrl = `${serverUrl}/api`;
 async function checkServerConnectivity() {
   const response = await new Promise((resolve, reject) => {
     $.ajax({
-      url: `${serverUrl}/healthCheck`,
+      url: `${serverUrl}/health-check/backend`,
       type: "GET",
       contentType: "application/json",
       data: JSON.stringify({}),
@@ -109,10 +109,13 @@ Vue.createApp({
         });
       });
 
-      if (response.status == true) {
-        this.stage = "converting";
-        console.log(response);
+      if (response.status == false) {
+        alert("Convertion cannot performed!");
+        return;
       }
+
+      this.stage = "converting";
+      
     },
   },
 
@@ -139,6 +142,7 @@ Vue.createApp({
       };
     },
   },
+
   async created() {
     // to use folder structure in backend set dummy user id to localstorage
     const userId = commonService.generateRandomWord();

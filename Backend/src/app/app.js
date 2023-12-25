@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const route = require("../route/route");
+const apiRoute = require("../route/apiRoute");
+const healthCheckRoute = require("../route/healthCheckRoute");
 const expressService = require("../service/expressService");
 
 const runApp = () => {
@@ -17,13 +18,11 @@ const runApp = () => {
     next();
   });
 
-  // healthCheck endpoint as get
-  app.get("/healthCheck", (req, res, next) => {
-    expressService.returnResponse(res, 200, "Service is up.");
-  });
+  // naviage healthCheck endpoint
+  app.use("/health-check", expressService.displayRequestInfo, healthCheckRoute);
 
   // direct api endpoint to route
-  app.use("/api", expressService.displayRequestInfo, route);
+  app.use("/api", expressService.displayRequestInfo, apiRoute);
   return app;
 };
 
