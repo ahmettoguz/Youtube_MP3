@@ -23,7 +23,7 @@ class ExpressService {
         `Method  : ${req.method}\n` +
         `IP      : ${req.connection.remoteAddress}\n` +
         `Body    : ${JSON.stringify(req.body, null, 2)}\n` +
-        `--------------------------------------------------\n\n`
+        `--------------------------------------------------\n`
     );
 
     next();
