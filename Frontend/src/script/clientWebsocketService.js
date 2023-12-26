@@ -1,7 +1,10 @@
 "use strict";
 
 class ClientWebsocketService {
-  webSocket = null;
+  constructor() {
+    this.webSocket = null;
+    this.allMessages = [];
+  }
 
   connectWebsocket() {
     return new Promise((resolve, reject) => {
@@ -39,6 +42,7 @@ class ClientWebsocketService {
     try {
       this.webSocket.onmessage = (message) => {
         const incomingMessage = JSON.parse(message.data);
+        this.allMessages.unshift(incomingMessage);
         callback(incomingMessage);
       };
     } catch (err) {

@@ -1,4 +1,22 @@
 class CommonService {
+  async waitUntil(condition, maxTimeout, interval) {
+    return new Promise((resolve, reject) => {
+      const startTime = Date.now();
+
+      function checkCondition() {
+        if (condition()) {
+          resolve(true);
+        } else if (Date.now() - startTime > maxTimeout) {
+          resolve(false);
+        } else {
+          setTimeout(checkCondition, interval);
+        }
+      }
+
+      checkCondition();
+    });
+  }
+
   formatTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);

@@ -6,41 +6,60 @@ dotenv.config();
 
 class ServerWebsocketService {
   constructor(port) {
-    this.wsServer = new WebSocket.Server({ port });
     this.clients = new Map();
-    this.currentClientId = commonService.generateRandomWord();
+    this.currentClientId = null;
+    this.currentWs = null;
 
+    this.wsServer = new WebSocket.Server({ port: port });
     this.wsServer.on("connection", (ws) => {
-      this.clients.set(this.currentClientId, ws);
-
-      console.info("Client connected to websocket");
-
-      ws.send(
-        JSON.stringify({
-          status: "connected",
-          message: "Connected to websocket",
-          clientId: this.currentClientId,
-        })
-      );
-
-      ws.on("message", (message) => {
-        console.info(
-          `Received message from client ${this.currentClientId}: ${message}`
-        );
-      });
-
-      ws.on("close", () => {
-        console.info(
-          `Client ${this.currentClientId} disconnected from websocket`
-        );
-        this.clients.delete(this.currentClientId);
-      });
+      this.currentWs = ws;
+      this.handleConnection(ws);
     });
   }
 
-  // getter for client id 
+  // getter for client id
   get getCurrentClientId() {
     return this.currentClientId;
+  }
+
+  isUserConnected(userId) {
+    return this.clients.has(userId);
+  }
+
+  connectClient(userId) {
+    this.currentClientId = userId;
+    if (this.currentWs == null) {
+      console.log("Client cannot connected to websocket");
+      return false;
+    }
+
+    this.clients.set(this.currentClientId, this.currentWs);
+    return true;
+  }
+
+  handleConnection(ws) {
+    console.log("Client connected to websocket");
+
+    ws.send(
+      JSON.stringify({
+        status: "connected",
+        message: "Connected to websocket",
+        clientId: this.currentClientId,
+      })
+    );
+
+    ws.on("message", (message) => {
+      console.info(
+        `Received message from client ${this.currentClientId}: ${message}`
+      );
+    });
+
+    ws.on("close", () => {
+      console.info(
+        `Client ${this.currentClientId} disconnected from websocket`
+      );
+      this.clients.delete(this.currentClientId);
+    });
   }
 
   // Send message to every clients

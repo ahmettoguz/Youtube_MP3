@@ -41,6 +41,11 @@ class CommonService {
   getHeaderValue(req, headerKey) {
     return req.headers[headerKey];
   }
+
+  sleep(ms) {
+    // await commonService.sleep(3000);
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
 
 const commonService = new CommonService();

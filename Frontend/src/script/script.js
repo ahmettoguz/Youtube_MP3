@@ -1,36 +1,14 @@
 "use strict";
 import commonService from "./commonService.js";
+import clientWebsocketService from "./clientWebsocketService.js";
 
 const serverUrl = "http://localhost";
 const apiUrl = `${serverUrl}/api`;
 
-async function checkServerConnectivity() {
-  const response = await new Promise((resolve, reject) => {
-    $.ajax({
-      url: `${serverUrl}/health-check/backend`,
-      type: "GET",
-      contentType: "application/json",
-      data: JSON.stringify({}),
-      success: function (data) {
-        resolve({ status: true, data: data });
-      },
-      error: function (error) {
-        resolve({ status: false });
-      },
-    });
-  });
-
-  if (!response.status) {
-    alert("Cannot connected to server!");
-    return;
-  }
-
-  console.log("Backend server connection is successful.");
-}
-
 Vue.createApp({
   data() {
     return {
+      userLocalId: null,
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
@@ -86,9 +64,6 @@ Vue.createApp({
     async convertMusic() {
       const videoUrlInput = $("#videoUrlInput").val();
 
-      // get user id to use in header part
-      const userId = localStorage.getItem("ytmp3Id");
-
       const response = await new Promise((resolve, reject) => {
         $.ajax({
           url: `${apiUrl}/convertUrl`,
@@ -98,7 +73,7 @@ Vue.createApp({
             url: videoUrlInput,
           }),
           headers: {
-            "User-Id": userId,
+            "User-Id": this.userLocalId,
           },
           success: function (data) {
             resolve({ status: true, data: data });
@@ -115,7 +90,91 @@ Vue.createApp({
       }
 
       this.stage = "converting";
-      
+    },
+
+    async handleUserId() {
+      // check if it is already setted
+      this.userLocalId = localStorage.getItem("ytmp3Id");
+
+      // if not set new one
+      if (this.userLocalId == null)
+        localStorage.setItem("ytmp3Id", commonService.generateRandomWord());
+    },
+
+    websocketMessageReceived(incomingMessage) {
+      console.log("Received websocket message:", incomingMessage);
+      // clientWebsocketService.sendMessage({ text: "Hello, server!" });
+    },
+
+    async checkWebsocketConnectivity() {
+      // connect to websocket
+      await clientWebsocketService.connectWebsocket();
+      clientWebsocketService.receiveMessage(this.websocketMessageReceived);
+
+      // send request to endpoint to receive healthcheck
+      await new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${serverUrl}/health-check/websocket`,
+          type: "GET",
+          contentType: "application/json",
+          headers: {
+            "User-Id": this.userLocalId,
+          },
+          data: JSON.stringify({}),
+          success: function (data) {
+            resolve({ state: true, data: data });
+          },
+          error: function (error) {
+            resolve({ state: false });
+          },
+        });
+      });
+
+      // wait websocket message with waitUntil
+      const status = await commonService.waitUntil(
+        function () {
+          if (clientWebsocketService.allMessages[0])
+            return (
+              clientWebsocketService.allMessages[0].message ==
+              "websocket health check"
+            );
+          else return false;
+        },
+        5000,
+        100
+      );
+
+      // check status and return
+      if (!status) {
+        console.log("Websocket connection couldn't establised");
+        return false;
+      }
+      console.log("Websocket connection is successful.");
+      return true;
+    },
+
+    async checkServerConnectivity() {
+      const response = await new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${serverUrl}/health-check/backend`,
+          type: "GET",
+          contentType: "application/json",
+          data: JSON.stringify({}),
+          success: function (data) {
+            resolve({ state: true, data: data });
+          },
+          error: function (error) {
+            resolve({ state: false });
+          },
+        });
+      });
+
+      if (!response.state) {
+        return false;
+      }
+
+      console.log("Backend server connection is successful.");
+      return true;
     },
   },
 
@@ -144,16 +203,16 @@ Vue.createApp({
   },
 
   async created() {
-    // to use folder structure in backend set dummy user id to localstorage
-    const userId = commonService.generateRandomWord();
+    // I use user id for backend specific music folders by the help of localstorage
+    this.handleUserId();
 
-    // check if it is already setted
-    const id = localStorage.getItem("ytmp3Id");
-
-    // set new one if there is no id
-    if (id == null) localStorage.setItem("ytmp3Id", userId);
-
-    // check backend server with get request
-    checkServerConnectivity();
+    // check both server and websocket connections
+    const [statusServer, statusWebsocket] = await Promise.all([
+      this.checkServerConnectivity(),
+      this.checkWebsocketConnectivity(),
+    ]);
+    if (statusServer == false || statusWebsocket == false) {
+      alert("Connection Problem!!!");
+    }
   },
 }).mount(".container");
