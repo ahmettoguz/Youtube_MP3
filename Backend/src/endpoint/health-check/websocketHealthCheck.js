@@ -24,6 +24,7 @@ const websocketHealthCheck = async (req, res) => {
     serverWebsocketService.getCurrentClientId,
     {
       status: "connected",
+      category: "health check",
       message: "websocket health check",
     }
   );
