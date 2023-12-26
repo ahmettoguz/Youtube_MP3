@@ -12,8 +12,8 @@ Vue.createApp({
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
-      // stage: "initial",
-      stage: "converting",
+      conversionProgress: null,
+      stage: "initial",
     };
   },
   methods: {
@@ -71,6 +71,7 @@ Vue.createApp({
 
       // change stage
       this.stage = "converting";
+      this.conversionProgress = 0;
 
       // get video url
       const videoUrlInput = $("#videoUrlInput").val();
@@ -115,8 +116,13 @@ Vue.createApp({
 
       // video conversion stages
       if (data.category == "convert") {
-        if (data.status == "converting") this.stage = "converting";
-        else if (data.status == "completed") this.stage = "converted";
+        if (data.status == "converting") {
+          this.conversionProgress = data.data;
+          this.stage = "converting";
+        } else if (data.status == "completed") {
+          this.conversionProgress = 100;
+          this.stage = "converted";
+        }
       }
     },
 
