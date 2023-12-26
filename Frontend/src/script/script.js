@@ -12,7 +12,8 @@ Vue.createApp({
       videoBanner: "",
       videoSongName: "",
       videoLenght: null,
-      stage: "initial",
+      // stage: "initial",
+      stage: "converting",
     };
   },
   methods: {
@@ -68,6 +69,10 @@ Vue.createApp({
         return false;
       }
 
+      // change stage
+      this.stage = "converting";
+
+      // get video url
       const videoUrlInput = $("#videoUrlInput").val();
 
       const response = await new Promise((resolve, reject) => {
@@ -94,8 +99,6 @@ Vue.createApp({
         alert("Convertion cannot performed!");
         return;
       }
-
-      this.stage = "converting";
     },
 
     async handleUserId() {
@@ -107,9 +110,14 @@ Vue.createApp({
         localStorage.setItem("ytmp3Id", commonService.generateRandomWord());
     },
 
-    websocketMessageReceived(incomingMessage) {
-      console.log("Received websocket message:", incomingMessage);
-      // clientWebsocketService.sendMessage({ text: "Hello, server!" });
+    websocketMessageReceived(data) {
+      console.log("Received websocket message:", data);
+
+      // video conversion stages
+      if (data.category == "convert") {
+        if (data.status == "converting") this.stage = "converting";
+        else if (data.status == "completed") this.stage = "converted";
+      }
     },
 
     async checkWebsocketConnectivity() {
@@ -186,24 +194,23 @@ Vue.createApp({
 
   computed: {
     foundedSongClass() {
+      const acceptedStages = ["videoFound", "converting", "converted"];
+      const state = acceptedStages.includes(this.stage);
+
       return {
-        "opacity-100":
-          this.stage === "videoFound" || this.stage === "converting",
-        invisible: this.stage !== "videoFound" && this.stage !== "converting",
-        "p-3": this.stage === "videoFound" || this.stage === "converting",
+        "opacity-100": state,
+        invisible: !state,
+        "p-3": state,
       };
     },
 
     foundedSongStyle() {
+      const acceptedStages = ["videoFound", "converting", "converted"];
+      const state = acceptedStages.includes(this.stage);
+
       return {
-        left:
-          this.stage === "videoFound" || this.stage === "converting"
-            ? "0px"
-            : "-50px",
-        height:
-          this.stage != "videoFound" && this.stage !== "converting"
-            ? "0px"
-            : "auto",
+        left: state ? "0px" : "-50px",
+        height: !state ? "0px" : "auto",
       };
     },
   },

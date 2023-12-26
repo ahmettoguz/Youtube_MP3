@@ -50,7 +50,8 @@
                   {{stage != 'searchingVideo' ? 'Search' : 'Searching'}}
 
                   <span
-                    :class="{'spinner-border': true, 'spinner-border-sm': true, 'd-none': stage != 'searchingVideo'}"
+                    class="spinner-border spinner-border-sm"
+                    :class="{'d-none': stage != 'searchingVideo'}"
                     role="status"
                     aria-hidden="true"
                   ></span>
@@ -86,8 +87,16 @@
                   class="btn btn-outline-primary"
                   type="button"
                   @click="convertMusic"
+                  :disabled="stage == 'converting'"
                 >
-                  Convert
+                  {{stage != 'converting' ? 'Convert' : 'Converting'}}
+
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    :class="{'d-none': stage != 'converting'}"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
                 </button>
               </div>
             </div>
