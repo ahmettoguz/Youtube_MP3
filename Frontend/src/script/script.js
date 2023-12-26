@@ -62,6 +62,12 @@ Vue.createApp({
     },
 
     async convertMusic() {
+      // check websocket connection
+      if (!clientWebsocketService.getConnectionStatus()) {
+        alert("Ws connection down!");
+        return false;
+      }
+
       const videoUrlInput = $("#videoUrlInput").val();
 
       const response = await new Promise((resolve, reject) => {
@@ -106,10 +112,15 @@ Vue.createApp({
       // clientWebsocketService.sendMessage({ text: "Hello, server!" });
     },
 
+    websocketError(err) {
+      console.log("Websocket Error:", err);
+    },
+
     async checkWebsocketConnectivity() {
       // connect to websocket
       await clientWebsocketService.connectWebsocket();
       clientWebsocketService.receiveMessage(this.websocketMessageReceived);
+      clientWebsocketService.handleWebSocketError(this.websocketError);
 
       // send request to endpoint to receive healthcheck
       await new Promise((resolve, reject) => {

@@ -3,7 +3,12 @@
 class ClientWebsocketService {
   constructor() {
     this.webSocket = null;
+    this.connectionStatus = null;
     this.allMessages = [];
+  }
+
+  getConnectionStatus() {
+    return this.connectionStatus;
   }
 
   connectWebsocket() {
@@ -12,15 +17,24 @@ class ClientWebsocketService {
         this.webSocket = new WebSocket(`ws://localhost:8080`);
 
         this.webSocket.onopen = () => {
+          this.connectionStatus = true;
           resolve({ state: true });
         };
 
         this.webSocket.onerror = (error) => {
           // console.error("WebSocket connection error:", error);
+          this.connectionStatus = false;
+          resolve({ state: false });
+        };
+
+        this.webSocket.onclose = (event) => {
+          console.log("WebSocket closed:", event);
+          this.connectionStatus = false;
           resolve({ state: false });
         };
       } catch (err) {
         // console.error("Error connecting WebSocket:", err);
+        this.connectionStatus = false;
         resolve({ state: false });
       }
     });

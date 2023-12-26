@@ -1,9 +1,11 @@
 const yt = require("yt-converter");
 const commonService = require("./commonService");
+const serverWebsocketService = require("./serverWebsocketService");
 
 class YtService {
   constructor() {
     this.downloadProgress = null;
+    this.lastDownloadProgress = null;
   }
 
   async getUrlInfo(url) {
@@ -20,15 +22,48 @@ class YtService {
     }
   }
 
-  onConverting(data) {
-    console.log(data);
-  }
+  onConverting = (data) => {
+    this.downloadProgress = Math.round(data);
 
-  onCovertFinished() {
+    if (
+      (this.downloadProgress > this.lastDownloadProgress + 15 ||
+        this.downloadProgress == 100) &&
+      this.lastDownloadProgress != 100
+    ) {
+      // send message to client with websocket
+      serverWebsocketService.sendMessageToClient(
+        serverWebsocketService.getCurrentClientId,
+        {
+          status: "converting",
+          category: "convert",
+          message: "music converting",
+          data: this.downloadProgress,
+        }
+      );
+
+      // set last progress
+      this.lastDownloadProgress = this.downloadProgress;
+      console.log(this.downloadProgress);
+    }
+  };
+
+  onCovertFinished = () => {
+    // send message to client with websocket
+    serverWebsocketService.sendMessageToClient(
+      serverWebsocketService.getCurrentClientId,
+      {
+        status: "completed",
+        category: "convert",
+        message: "music converted",
+      }
+    );
+
     console.log("convert finished");
-  }
+  };
 
   async downloadToServer(url, filePath) {
+    this.downloadProgress = 0;
+    this.lastDownloadProgress = 0;
     const status = await yt.convertAudio(
       {
         url: url,
