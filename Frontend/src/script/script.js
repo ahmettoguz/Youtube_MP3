@@ -112,15 +112,10 @@ Vue.createApp({
       // clientWebsocketService.sendMessage({ text: "Hello, server!" });
     },
 
-    websocketError(err) {
-      console.log("Websocket Error:", err);
-    },
-
     async checkWebsocketConnectivity() {
       // connect to websocket
       await clientWebsocketService.connectWebsocket();
       clientWebsocketService.receiveMessage(this.websocketMessageReceived);
-      clientWebsocketService.handleWebSocketError(this.websocketError);
 
       // send request to endpoint to receive healthcheck
       await new Promise((resolve, reject) => {
