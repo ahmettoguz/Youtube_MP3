@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fs = require("fs");
 
 class ExpressService {
   returnResponse(res, statusCode, message, data = null) {
@@ -31,16 +31,32 @@ class ExpressService {
     next();
   }
 
-  async returnFile(res, file) {
+  async returnFile(res, filePath, musicName) {
+    // musicName = "asfd";
+    // fs.readFile(filePath, (hata, veri) => {
+    //   if (hata) {
+    //     res.writeHead(404, { "Content-Type": "text/plain" });
+    //     res.end("Dosya bulunamadı.");
+    //   } else {
+    //     res.setHeader(
+    //       "Content-Disposition",
+    //       `attachment; filename="${musicName}"`
+    //     );
+    //     res.setHeader("Content-type", "audio/mpeg");
+    //     res.end(veri);
+    //   }
+    // });
+    // ---
     // res.download(file);
-    try {
-      const data = await fs.readFile(file);
-      res.type('audio/mpeg');
-      res.send(data);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Error reading file');
-    }
+    // ---
+    // try {
+    //   const data = await fs.readFile(file);
+    //   res.type('audio/mpeg');
+    //   res.send(data);
+    // } catch (err) {
+    //   console.error(err);
+    //   res.status(500).send('Error reading file');
+    // }
   }
 }
 

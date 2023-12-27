@@ -199,7 +199,6 @@ Vue.createApp({
           type: "POST",
           contentType: "application/json",
           responseType: "arraybuffer",
-          dataType: "binary",
           data: JSON.stringify({}),
           beforeSend: () => {},
           success: function (data) {
