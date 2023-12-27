@@ -24,7 +24,6 @@ class YtService {
         songName = info.title.split(" - ")[0];
         songAuthor = info.author.name.split(" - ")[0];
       }
-      console.log(info);
 
       return {
         convertedSongName: `${info.title}.mp3`,
