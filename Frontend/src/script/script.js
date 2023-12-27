@@ -198,6 +198,9 @@ Vue.createApp({
           url: `${apiUrl}/download`,
           type: "POST",
           contentType: "application/json",
+          headers: {
+            "User-Id": this.userLocalId,
+          },
           xhrFields: {
             responseType: "blob",
           },

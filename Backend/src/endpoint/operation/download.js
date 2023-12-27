@@ -8,11 +8,7 @@ const download = async (req, res) => {
 
   // create file of the music
   const musicName = "evdeki saat - rüyadasın (slowed & reverb).mp3";
-  const filePath = path.join(
-    __dirname,
-    "../../storage/famgek_77357",
-    musicName
-  );
+  const filePath = path.join(__dirname, `../../storage/${userId}`, musicName);
 
   // return music file to clients
   await expressService.returnFile(res, filePath);
