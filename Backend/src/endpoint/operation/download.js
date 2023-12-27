@@ -15,7 +15,7 @@ const download = async (req, res) => {
   );
 
   // return music file to clients
-  await expressService.returnFile(res, filePath, musicName);
+  await expressService.returnFile(res, filePath);
 };
 
 module.exports = download;

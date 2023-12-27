@@ -198,7 +198,9 @@ Vue.createApp({
           url: `${apiUrl}/download`,
           type: "POST",
           contentType: "application/json",
-          responseType: "arraybuffer",
+          xhrFields: {
+            responseType: "blob",
+          },
           data: JSON.stringify({}),
           beforeSend: () => {},
           success: function (data) {
