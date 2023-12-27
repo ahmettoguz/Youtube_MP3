@@ -4,6 +4,7 @@ const serverWebsocketService = require("./serverWebsocketService");
 
 class YtService {
   constructor() {
+    this.videoUrl = null;
     this.downloadProgress = null;
     this.lastDownloadProgress = null;
   }
@@ -11,6 +12,7 @@ class YtService {
   async getUrlInfo(url) {
     try {
       const info = await yt.getInfo(url);
+      this.videoUrl = url;
       return {
         songName: info.title,
         imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
@@ -61,12 +63,12 @@ class YtService {
     console.log("convert finished");
   };
 
-  async downloadToServer(url, filePath) {
+  async downloadToServer(filePath) {
     this.downloadProgress = 0;
     this.lastDownloadProgress = 0;
     const status = await yt.convertAudio(
       {
-        url: url,
+        url: this.videoUrl,
         itag: 140,
         directoryDownload: filePath,
       },

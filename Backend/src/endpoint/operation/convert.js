@@ -5,8 +5,6 @@ const fileService = require("../../service/fileService");
 const path = require("path");
 
 const getUrlInfo = async (req, res) => {
-  const url = req.body.url;
-
   // get user id to use folder
   const userId = commonService.getHeaderValue(req, "user-id");
 
@@ -16,7 +14,6 @@ const getUrlInfo = async (req, res) => {
 
   // start download
   const status = await ytService.downloadToServer(
-    url,
     path.join(userFolderPath)
   );
 

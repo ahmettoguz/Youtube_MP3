@@ -73,17 +73,12 @@ Vue.createApp({
       this.stage = "converting";
       this.conversionProgress = 0;
 
-      // get video url
-      const videoUrlInput = $("#videoUrlInput").val();
-
       const response = await new Promise((resolve, reject) => {
         $.ajax({
           url: `${apiUrl}/convertUrl`,
           type: "POST",
           contentType: "application/json",
-          data: JSON.stringify({
-            url: videoUrlInput,
-          }),
+          data: JSON.stringify({}),
           headers: {
             "User-Id": this.userLocalId,
           },
@@ -195,6 +190,26 @@ Vue.createApp({
 
       console.log("Backend server connection is successful.");
       return true;
+    },
+
+    async downloadMusic() {
+      const response = await new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${apiUrl}/getUrlInfo`,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({}),
+          beforeSend: () => {
+            this.stage = "searchingVideo";
+          },
+          success: function (data) {
+            resolve({ status: true, data: data });
+          },
+          error: function (error) {
+            resolve({ status: false });
+          },
+        });
+      });
     },
   },
 
