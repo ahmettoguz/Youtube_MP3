@@ -28,6 +28,10 @@ class ExpressService {
 
     next();
   }
+
+  async returnFile(res, path, fileName) {
+    res.download(path, fileName);
+  }
 }
 
 const expressService = new ExpressService();
