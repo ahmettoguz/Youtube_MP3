@@ -1,3 +1,5 @@
+const fs = require('fs').promises;
+
 class ExpressService {
   returnResponse(res, statusCode, message, data = null) {
     const state = statusCode == 200 ? true : false;
@@ -29,8 +31,16 @@ class ExpressService {
     next();
   }
 
-  async returnFile(res, path, fileName) {
-    res.download(path, fileName);
+  async returnFile(res, file) {
+    // res.download(file);
+    try {
+      const data = await fs.readFile(file);
+      res.type('audio/mpeg');
+      res.send(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error reading file');
+    }
   }
 }
 

@@ -198,18 +198,42 @@ Vue.createApp({
           url: `${apiUrl}/download`,
           type: "POST",
           contentType: "application/json",
+          responseType: "arraybuffer",
+          dataType: "binary",
           data: JSON.stringify({}),
           beforeSend: () => {},
           success: function (data) {
             resolve({ status: true, data: data });
           },
-          error: function (error) {
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request failed:", textStatus, errorThrown);
             resolve({ status: false });
           },
         });
       });
 
       console.log(response);
+
+      // download operation with virtual link
+      if (response.status && response.data) {
+        // Create a Blob from the response data
+        const blob = new Blob([response.data], { type: "audio/mp3" });
+
+        // Create a download link
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "music.mp3";
+
+        // Append the link to the document and trigger a click to start the download
+        document.body.appendChild(link);
+        link.click();
+
+        // Remove the link from the document
+        document.body.removeChild(link);
+      } else {
+        console.log("Download failed");
+      }
+      // download operation with virtual link end
     },
   },
 
