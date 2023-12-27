@@ -1,3 +1,56 @@
 .ts {
   transition: 200ms ease;
 }
+
+/* navigation bar */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.nav-link ~ span {
+  display: block;
+  position: relative;
+
+  width: 0%;
+  height: 3px;
+  border-radius: 5px;
+  background-image: linear-gradient(130deg, #ff7a17, #af002d 41%, #319197 76%);
+  transition: 300ms ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-link:hover ~ span {
+  width: 100%;
+}
+
+.theme-icon {
+  cursor: pointer;
+}
+
+.theme-icon i {
+  font-size: 1.7rem;
+  transition: 300ms;
+}
+
+.theme-icon:hover i {
+  transform: rotate(-30deg);
+}
+/* navigation bar end */
+
+/* footer */
+footer {
+  opacity: 1;
+  font-style: italic;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(90deg, gray -150%, black 50%, gray 250%);
+  text-align: center;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+/* footer end */
