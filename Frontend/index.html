@@ -67,14 +67,16 @@
             :style="foundedSongStyle"
           >
             <div class="col-7">
-              <h4>Song Name</h4>
-              <p class="ms-2">{{ songName }}</p>
+              <h5>Song Name</h5>
+              <p class="ms-2 fs-5">{{ songName }}</p>
 
-              <h4 class="pt-2">Song Author</h4>
-              <p class="ms-2">{{ songAuthor }}</p>
+              <hr class="border-primary" />
+              <h5 class="pt-2">Song Author</h5>
+              <p class="ms-2 fs-5">{{ songAuthor }}</p>
 
-              <h4 class="pt-2">Song Length</h4>
-              <p class="ms-2">{{ videoLenght }}.</p>
+              <hr class="border-primary" />
+              <h5 class="pt-2">Song Length</h5>
+              <p class="ms-2 fs-5">{{ videoLenght }}.</p>
             </div>
             <div class="col-5 d-flex align-items-center">
               <img
@@ -101,7 +103,10 @@
               <!-- convert button end -->
 
               <!-- progress bar -->
-              <div v-else class="col12 d-flex justify-content-center mt-2">
+              <div
+                v-else-if="stage == 'converting'"
+                class="col12 d-flex justify-content-center mt-2"
+              >
                 <div class="row w-100 px-0 mx-0">
                   <div class="col-2 px-0">
                     <div class="text-center">{{conversionProgress}}%</div>
@@ -127,17 +132,25 @@
                 </div>
               </div>
               <!-- progress bar end -->
+
+              <!-- download button -->
+              <div
+                v-else-if="stage == 'converted'"
+                class="col12 d-flex justify-content-center mt-2"
+              >
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  @click="downloadMusic"
+                >
+                  Download
+                </button>
+              </div>
+              <!-- download button end -->
             </div>
           </div>
         </div>
       </div>
-
-      <div class="mt-4 text-center">
-        <button class="btn btn-success" @click="downloadMusic">
-          Trial Button
-        </button>
-      </div>
-    </div>
 
     <!-- Vue Js -->
     <script src="./dist/vue_3.3/vue.js"></script>

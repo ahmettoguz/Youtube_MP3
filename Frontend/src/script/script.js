@@ -121,7 +121,11 @@ Vue.createApp({
           this.stage = "converting";
         } else if (data.status == "completed") {
           this.conversionProgress = 100;
-          this.stage = "converted";
+
+          // change stage with delay
+          setTimeout(() => {
+            this.stage = "converted";
+          }, 700);
         }
       }
     },
