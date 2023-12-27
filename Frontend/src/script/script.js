@@ -195,13 +195,11 @@ Vue.createApp({
     async downloadMusic() {
       const response = await new Promise((resolve, reject) => {
         $.ajax({
-          url: `${apiUrl}/getUrlInfo`,
+          url: `${apiUrl}/download`,
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify({}),
-          beforeSend: () => {
-            this.stage = "searchingVideo";
-          },
+          beforeSend: () => {},
           success: function (data) {
             resolve({ status: true, data: data });
           },
@@ -210,6 +208,8 @@ Vue.createApp({
           },
         });
       });
+
+      console.log(response);
     },
   },
 
