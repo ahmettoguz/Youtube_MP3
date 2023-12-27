@@ -13,8 +13,23 @@ class YtService {
     try {
       const info = await yt.getInfo(url);
       this.videoUrl = url;
+
+      // adjust song name and author for different situation
+      let songName = null;
+      let songAuthor = null;
+      if (info.title.split(" - ")[1] != undefined) {
+        songName = info.title.split(" - ")[1];
+        songAuthor = info.title.split(" - ")[0];
+      } else {
+        songName = info.title.split(" - ")[0];
+        songAuthor = info.author.name.split(" - ")[0];
+      }
+      console.log(info);
+
       return {
-        songName: info.title,
+        convertedSongName: `${info.title}.mp3`,
+        songName,
+        songAuthor,
         imgUrl: info.thumbnails[info.thumbnails.length - 1].url,
         songLength: commonService.formatTime(info.lengthSeconds),
         status: true,

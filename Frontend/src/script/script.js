@@ -9,8 +9,10 @@ Vue.createApp({
   data() {
     return {
       userLocalId: null,
-      videoBanner: "",
-      videoSongName: "",
+      videoBanner: null,
+      convertedSongName: null,
+      songName: null,
+      songAuthor: null,
       videoLenght: null,
       conversionProgress: null,
       stage: "initial",
@@ -50,8 +52,11 @@ Vue.createApp({
         // change stage to display found music part
         this.stage = "videoFound";
 
+        // get informations
+        this.convertedSongName = data.convertedSongName;
         this.videoBanner = data.imgUrl;
-        this.videoSongName = data.songName;
+        this.songName = data.songName;
+        this.songAuthor = data.songAuthor;
         this.videoLenght = data.songLength;
 
         // display label for input field
@@ -204,7 +209,9 @@ Vue.createApp({
           xhrFields: {
             responseType: "blob",
           },
-          data: JSON.stringify({}),
+          data: JSON.stringify({
+            musicName: this.convertedSongName,
+          }),
           beforeSend: () => {},
           success: function (data) {
             resolve({ status: true, data: data });
@@ -226,7 +233,7 @@ Vue.createApp({
         // Create a download link
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = "music.mp3";
+        link.download = `${this.songName} - ${this.songAuthor}`;
 
         // Append the link to the document and trigger a click to start the download
         document.body.appendChild(link);

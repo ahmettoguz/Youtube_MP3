@@ -6,8 +6,10 @@ const download = async (req, res) => {
   // get user id to use folder
   const userId = commonService.getHeaderValue(req, "user-id");
 
+  // get music name
+  const musicName = req.body.musicName;
+
   // create file of the music
-  const musicName = "evdeki saat - rüyadasın (slowed & reverb).mp3";
   const filePath = path.join(__dirname, `../../storage/${userId}`, musicName);
 
   // return music file to clients
