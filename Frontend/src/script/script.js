@@ -16,8 +16,10 @@ Vue.createApp({
       videoLenght: null,
       conversionProgress: null,
       stage: "initial",
+      themeMode: null,
     };
   },
+
   methods: {
     async findMusic(e) {
       const videoUrlInput = $("#videoUrlInput").val();
@@ -250,6 +252,28 @@ Vue.createApp({
       }
       // download operation with virtual link end
     },
+
+    toggleThemeMode() {
+      // if (theme_Mode == "dark") {
+      console.log(1);
+      alert(1);
+    },
+
+    async initThemeMode() {
+      this.themeMode = localStorage.getItem("yt-theme-mode");
+      console.log(this.themeMode);
+      if (this.themeMode == undefined || this.themeMode == null) {
+        localStorage.setItem("yt-theme-mode", "light");
+      }
+    },
+
+    async changeThemeMode(themeMode) {
+      // set to localstorage
+      localStorage.setItem("yt-theme-mode", themeMode);
+
+      // change overall theme
+      $("body").attr("data-bs-theme", this.themeMode);
+    },
   },
 
   computed: {
@@ -279,6 +303,12 @@ Vue.createApp({
     // I use user id for backend specific music folders by the help of localstorage
     this.handleUserId();
 
+    // initialize theme mode with localstorage
+    await this.initThemeMode();
+
+    // change theme mode
+    await this.changeThemeMode("dark");
+
     // check both server and websocket connections
     const [statusServer, statusWebsocket] = await Promise.all([
       this.checkServerConnectivity(),
@@ -288,4 +318,4 @@ Vue.createApp({
       alert("Connection Problem!!!");
     }
   },
-}).mount(".container");
+}).mount("#app");
