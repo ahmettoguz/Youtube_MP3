@@ -8,7 +8,7 @@ const apiUrl = `${serverUrl}/api`;
 Vue.createApp({
   data() {
     return {
-      serviceConnection: false,
+      serviceConnection: "initial",
       videoUrlInput: "https://youtu.be/ZtelRow0qNI",
       videoUrlInputValidation: "neutral",
       userLocalId: null,
@@ -356,7 +356,9 @@ Vue.createApp({
     if (statusServer == false || statusWebsocket == false) {
       alert("Connection Problem!!!");
     } else {
-      this.serviceConnection = true;
+      setTimeout(() => {
+        this.serviceConnection = true;
+      }, 1000);
     }
   },
 }).mount("#app");

@@ -88,7 +88,7 @@
       </nav>
       <!-- nav end -->
 
-      <div class="container pt-5 bg-body-tertiary shadow-lg min-vh-100">
+      <div class="container py-5 bg-body-tertiary shadow-lg min-vh-100">
         <div class="d-flex justify-content-center align-items-center">
           <img src="./src/img/favicon.png" height="50" class="pe-3" />
           <h1 class="mb-4 pt-5 pt-sm-3 text-center d-inline">
@@ -117,10 +117,10 @@
                   :class="{'col-3': stage != 'searchingVideo', 'col-5': stage == 'searchingVideo', 'col-md-3': stage != 'searchingVideo', 'col-lg-3': stage == 'searchingVideo'}"
                 >
                   <button
-                    class="btn btn-outline-primary"
+                    class="btn btn-danger"
                     type="submit"
                     @click.prevent="findMusic"
-                    :disabled="stage == 'searchingVideo' || !serviceConnection"
+                    :disabled="stage == 'searchingVideo' || serviceConnection != true"
                   >
                     {{stage != 'searchingVideo' ? 'Search' : 'Searching'}}
 
@@ -168,7 +168,7 @@
                   class="col12 d-flex justify-content-center"
                 >
                   <button
-                    class="btn btn-outline-primary"
+                    class="btn btn-danger"
                     type="button"
                     @click="convertMusic"
                   >
@@ -198,7 +198,7 @@
                           style="height: 25px"
                         >
                           <div
-                            class="progress-bar progress-bar-striped progress-bar-animated text-dark fs-5"
+                            class="progress-bar progress-bar-striped progress-bar-animated text-dark fs-5 bg-danger"
                             :style="{ width: conversionProgress + '%' }"
                           ></div>
                         </div>
@@ -214,7 +214,7 @@
                   class="col12 d-flex justify-content-center mt-2"
                 >
                   <button
-                    class="btn btn-outline-primary"
+                    class="btn btn-danger"
                     type="button"
                     @click="downloadMusic"
                   >
@@ -237,21 +237,43 @@
       <!-- footer end -->
 
       <!-- layout  -->
-      <div class="layout">
-        <!-- loading gif -->
-        <div class="d-flex justify-content-center align-items-center h-100">
-          <div class="opacity-0"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
-          <div class="wave"></div>
+      <div class="layout" :class="{'d-none' : serviceConnection === true}">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div
+              class="col-12 col-sm-12 col-md-8 col-lg-5 bg-dark p-3 rounded shadow"
+            >
+              <div class="row">
+                <div class="col-12">
+                  <h1
+                    class="text-center text-white-50"
+                    style="font-family: 'Montserrat', sans-serif"
+                  >
+                    Connecting Server
+                  </h1>
+                </div>
+                <div class="col-12 mt-3">
+                  <!-- loading gif -->
+                  <div
+                    class="d-flex justify-content-center align-items-center h-100"
+                  >
+                    <div class="opacity-0"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                  </div>
+                  <!-- loading gif end -->
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- loading gif end -->
       </div>
       <!-- layout end -->
     </div>

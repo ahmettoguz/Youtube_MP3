@@ -60,6 +60,7 @@ footer a {
 /* body */
 .dark-body-bg {
   background-size: 22%;
+  background-position: 9% -40%;
   background-image: url(../img/bg-memphis-dark.jpg);
 }
 
@@ -71,13 +72,13 @@ footer a {
 
 /* loading gif */
 .wave {
-  width: 5px;
+  width: 6px;
   height: 100px;
   background: linear-gradient(45deg, white, skyblue, white);
   margin: 10px;
-  animation: wave 1s linear infinite;
+  animation: wave 900ms linear infinite;
   transform: scale(0);
-  border-radius: 20px;
+  border-radius: 4px;
 }
 .wave:nth-child(2) {
   animation-delay: 0.1s;
