@@ -77,7 +77,6 @@ Vue.createApp({
     async convertMusic() {
       // check websocket connection
       if (!clientWebsocketService.getConnectionStatus()) {
-        alert("Ws connection down!");
         return false;
       }
 
@@ -354,7 +353,7 @@ Vue.createApp({
     ]);
 
     if (statusServer == false || statusWebsocket == false) {
-      alert("Connection Problem!!!");
+      this.serviceConnection = false;
     } else {
       setTimeout(() => {
         this.serviceConnection = true;
