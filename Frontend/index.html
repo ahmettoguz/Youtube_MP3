@@ -104,8 +104,8 @@
                   <input
                     type="search"
                     class="form-control"
-                    id="videoUrlInput"
-                    value="https://youtu.be/ZtelRow0qNI"
+                    :class="videoUrlInputValidationClass"
+                    v-model="videoUrlInput"
                     placeholder="Video Url"
                   />
                   <div class="invalid-feedback">Video url is not valid!</div>

@@ -8,6 +8,8 @@ const apiUrl = `${serverUrl}/api`;
 Vue.createApp({
   data() {
     return {
+      videoUrlInput: "https://youtu.be/ZtelRow0qNI",
+      videoUrlInputValidation: "neutral",
       userLocalId: null,
       videoBanner: null,
       convertedSongName: null,
@@ -22,11 +24,8 @@ Vue.createApp({
 
   methods: {
     async findMusic(e) {
-      const videoUrlInput = $("#videoUrlInput").val();
-
       // remove previous information labels for input field
-      $("#videoUrlInput").removeClass("is-valid");
-      $("#videoUrlInput").removeClass("is-invalid");
+      this.videoUrlInputValidation = "neutral";
 
       const response = await new Promise((resolve, reject) => {
         $.ajax({
@@ -34,7 +33,7 @@ Vue.createApp({
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify({
-            url: videoUrlInput,
+            url: this.videoUrlInput,
           }),
           beforeSend: () => {
             this.stage = "searchingVideo";
@@ -62,10 +61,10 @@ Vue.createApp({
         this.videoLenght = data.songLength;
 
         // display label for input field
-        $("#videoUrlInput").addClass("is-valid");
+        this.videoUrlInputValidation = "valid";
       } else {
         // display label for input field
-        $("#videoUrlInput").addClass("is-invalid");
+        this.videoUrlInputValidation = "invalid";
       }
     },
 
@@ -313,6 +312,17 @@ Vue.createApp({
       return {
         "light-body-bg": state,
         "dark-body-bg": !state,
+      };
+    },
+
+    videoUrlInputValidationClass() {
+      const isValid = this.videoUrlInputValidation == "valid" ? true : false;
+      const isInvalid =
+        this.videoUrlInputValidation == "invalid" ? true : false;
+
+      return {
+        "is-invalid": isInvalid,
+        "is-valid": isValid,
       };
     },
   },
