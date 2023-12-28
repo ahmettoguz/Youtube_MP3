@@ -11,7 +11,7 @@ class ClientWebsocketService {
     return this.connectionStatus;
   }
 
-  connectWebsocket() {
+  connectWebsocket(errorCallback) {
     return new Promise((resolve, reject) => {
       try {
         this.webSocket = new WebSocket(`ws://localhost:8080`);
@@ -30,6 +30,7 @@ class ClientWebsocketService {
         this.webSocket.onclose = (event) => {
           console.log("WebSocket closed:", event);
           this.connectionStatus = false;
+          errorCallback();
           resolve({ state: false });
         };
       } catch (err) {

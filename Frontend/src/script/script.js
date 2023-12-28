@@ -137,9 +137,13 @@ Vue.createApp({
       }
     },
 
+    errorCallback() {
+      this.serviceConnection = false;
+    },
+
     async checkWebsocketConnectivity() {
       // connect to websocket
-      await clientWebsocketService.connectWebsocket();
+      await clientWebsocketService.connectWebsocket(this.errorCallback);
       clientWebsocketService.receiveMessage(this.websocketMessageReceived);
 
       // send request to endpoint to receive healthcheck
