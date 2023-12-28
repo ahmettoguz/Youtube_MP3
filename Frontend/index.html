@@ -120,7 +120,7 @@
                     class="btn btn-outline-primary"
                     type="submit"
                     @click.prevent="findMusic"
-                    :disabled="stage == 'searchingVideo'"
+                    :disabled="stage == 'searchingVideo' || !serviceConnection"
                   >
                     {{stage != 'searchingVideo' ? 'Search' : 'Searching'}}
 
