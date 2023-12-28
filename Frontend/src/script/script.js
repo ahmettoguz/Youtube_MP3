@@ -253,23 +253,24 @@ Vue.createApp({
       // download operation with virtual link end
     },
 
-    toggleThemeMode() {
-      // if (theme_Mode == "dark") {
-      console.log(1);
-      alert(1);
+    async toggleThemeMode() {
+      this.themeMode = this.themeMode == "light" ? "dark" : "light";
+      await this.changeThemeMode();
     },
 
     async initThemeMode() {
       this.themeMode = localStorage.getItem("yt-theme-mode");
-      console.log(this.themeMode);
       if (this.themeMode == undefined || this.themeMode == null) {
-        localStorage.setItem("yt-theme-mode", "light");
+        this.themeMode = "light";
+        localStorage.setItem("yt-theme-mode", this.themeMode);
       }
+
+      this.changeThemeMode(this.themeMode);
     },
 
-    async changeThemeMode(themeMode) {
+    async changeThemeMode() {
       // set to localstorage
-      localStorage.setItem("yt-theme-mode", themeMode);
+      localStorage.setItem("yt-theme-mode", this.themeMode);
 
       // change overall theme
       $("body").attr("data-bs-theme", this.themeMode);
@@ -295,6 +296,23 @@ Vue.createApp({
       return {
         left: state ? "0px" : "-50px",
         height: !state ? "0px" : "auto",
+      };
+    },
+
+    themeIconClass() {
+      const state = this.themeMode == "light" ? true : false;
+
+      return {
+        "fa-brightness": state,
+        "fa-moon": !state,
+      };
+    },
+
+    bodyBgClass() {
+      const state = this.themeMode == "light" ? true : false;
+      return {
+        "light-body-bg": state,
+        "dark-body-bg": !state,
       };
     },
   },

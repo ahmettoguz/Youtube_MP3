@@ -54,3 +54,15 @@ footer a {
   text-decoration: none;
 }
 /* footer end */
+
+/* body */
+.dark-body-bg {
+  background-size: 22%;
+  background-image: url(../img/bg-memphis-dark.jpg);
+}
+
+.light-body-bg {
+  background-size: 30%;
+  background-image: url(../img/bg-memphis-light.jpg);
+}
+/* body end */
