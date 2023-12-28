@@ -65,6 +65,11 @@ Vue.createApp({
       } else {
         // display label for input field
         this.videoUrlInputValidation = "invalid";
+
+        // change stage
+        setTimeout(() => {
+          this.stage = "initial";
+        }, 500);
       }
     },
 
