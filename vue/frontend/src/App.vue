@@ -2,12 +2,12 @@
 <template>
   <div class="container bg-body min-vh-100 shadow-lg">
     <section id="section" class="py-3">
-      <h3 class="text-center">Project List</h3>
-      <h4 class="text-center mb-4">Local Component</h4>
-      <div class="row flex-column align-items-center py-2">
-        <!-- <first-component></first-component>
-        <second-component></second-component> -->
-      </div>
+      <h3 class="text-center bg-danger">Project List</h3>
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-moon"></i>
     </section>
   </div>
 </template>
@@ -26,3 +26,9 @@ export default {
   },
 };
 </script>
+
+<style >
+* {
+  font-family: "Montserrat", fantasy;
+}
+</style>
