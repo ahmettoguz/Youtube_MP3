@@ -157,6 +157,7 @@
     <!-- footer component -->
     <footer-layout></footer-layout>
 
+    <!-- cover layout full page with loading gif -->
     <cover-layout :service-connection="serviceConnection"></cover-layout>
   </div>
 </template>
@@ -174,10 +175,10 @@ const apiUrl = `${serverUrl}/api`;
 
 import navigationBar from "./components/layout/NaivgationBar.vue";
 import footerLayout from "./components/layout/FooterLayout.vue";
-import CoverLayout from "./components/layout/coverLayout.vue";
+import coverLayout from "./components/layout/CoverLayout.vue";
 
 export default {
-  components: { navigationBar, footerLayout, CoverLayout },
+  components: { navigationBar, footerLayout, coverLayout },
 
   data() {
     return {
