@@ -69,3 +69,45 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* navigation bar */
+.navbar {
+  /* zindex is used for layout */
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.nav-link ~ span {
+  display: block;
+  position: relative;
+
+  width: 0%;
+  height: 3px;
+  border-radius: 5px;
+  background-image: linear-gradient(130deg, #ff7a17, #af002d 41%, #319197 76%);
+  transition: 300ms ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-link:hover ~ span {
+  width: 100%;
+}
+
+.theme-icon {
+  cursor: pointer;
+}
+
+.theme-icon i {
+  font-size: 1.7rem;
+  transition: 300ms;
+}
+
+.theme-icon:hover i {
+  transform: rotate(-30deg);
+}
+/* navigation bar end */
+</style>

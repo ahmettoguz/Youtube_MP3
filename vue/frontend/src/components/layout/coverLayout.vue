@@ -38,3 +38,21 @@ export default {
   props: ["serviceConnection"],
 };
 </script>
+
+<style scoped>
+/* layout  */
+.layout {
+  /* zindex is used for layout */
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.926);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* layout end */
+</style>

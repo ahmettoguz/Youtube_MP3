@@ -430,51 +430,13 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .ts {
   transition: 200ms ease;
 }
+</style>
 
-/* navigation bar */
-.navbar {
-  /* zindex is used for layout */
-  z-index: 1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.nav-link ~ span {
-  display: block;
-  position: relative;
-
-  width: 0%;
-  height: 3px;
-  border-radius: 5px;
-  background-image: linear-gradient(130deg, #ff7a17, #af002d 41%, #319197 76%);
-  transition: 300ms ease;
-}
-
-.nav-link:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.nav-link:hover ~ span {
-  width: 100%;
-}
-
-.theme-icon {
-  cursor: pointer;
-}
-
-.theme-icon i {
-  font-size: 1.7rem;
-  transition: 300ms;
-}
-
-.theme-icon:hover i {
-  transform: rotate(-30deg);
-}
-/* navigation bar end */
-
+<style scoped>
 /* body */
 .dark-body-bg {
   background-size: 22%;
@@ -488,71 +450,4 @@ export default {
   background-image: url(./assets/img/bg-memphis-light.jpg);
 }
 /* body end */
-
-/* loading gif */
-.wave {
-  width: 6px;
-  height: 100px;
-  background: linear-gradient(45deg, white, skyblue, white);
-  margin: 10px;
-  animation: wave 900ms linear infinite;
-  transform: scale(0);
-  border-radius: 4px;
-}
-.wave:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.wave:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.wave:nth-child(4) {
-  animation-delay: 0.3s;
-}
-.wave:nth-child(5) {
-  animation-delay: 0.4s;
-}
-.wave:nth-child(6) {
-  animation-delay: 0.5s;
-}
-.wave:nth-child(7) {
-  animation-delay: 0.6s;
-}
-.wave:nth-child(8) {
-  animation-delay: 0.7s;
-}
-.wave:nth-child(9) {
-  animation-delay: 0.8s;
-}
-.wave:nth-child(10) {
-  animation-delay: 0.9s;
-}
-
-@keyframes wave {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-/* loading gif end */
-
-/* layout  */
-.layout {
-  /* zindex is used for layout */
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.926);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/* layout end */
 </style>
