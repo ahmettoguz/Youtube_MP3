@@ -99,11 +99,11 @@ const apiUrl = `${serverUrl}/api`;
 
 import navigationBar from "./components/layout/NaivgationBar.vue";
 import footerLayout from "./components/layout/FooterLayout.vue";
-import coverLayout from "./components/layout/CoverLayout.vue";
+import CoverLayout from "./components/layout/CoverLayout.vue";
 import foundedSong from "./components/main/FoundedSong.vue";
 
 export default {
-  components: { navigationBar, footerLayout, coverLayout, foundedSong },
+  components: { navigationBar, footerLayout, CoverLayout, foundedSong },
 
   data() {
     return {
