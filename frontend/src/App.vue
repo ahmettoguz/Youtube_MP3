@@ -94,7 +94,8 @@ import $ from "jquery";
 import commonService from "./service/commonService.js";
 import clientWebsocketService from "./service/clientWebsocketService.js";
 
-const serverUrl = "http://localhost";
+const hostName = process.env.VUE_APP_HOST || "localhost";
+const serverUrl = `http://${hostName}`;
 const apiUrl = `${serverUrl}/api`;
 
 import navigationBar from "./components/layout/NaivgationBar.vue";

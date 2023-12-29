@@ -15,7 +15,8 @@ class ClientWebsocketService {
   connectWebsocket(errorCallback) {
     return new Promise((resolve, reject) => {
       try {
-        this.webSocket = new WebSocket(`ws://localhost:8080`);
+        const hostName = process.env.VUE_APP_HOST || "localhost";
+        this.webSocket = new WebSocket(`ws://${hostName}:8080`);
 
         this.webSocket.onopen = () => {
           this.connectionStatus = true;
