@@ -7,7 +7,9 @@
       @toggle-theme-mode="toggleThemeMode"
     ></navigation-bar>
 
+    <!-- main parts -->
     <div class="container py-5 bg-body-tertiary shadow-lg min-vh-100">
+      <!-- header part -->
       <div class="d-flex justify-content-center align-items-center">
         <img src="./assets/img/favicon.png" height="50" class="pe-3" />
         <h1 class="mb-4 pt-5 pt-sm-3 text-center d-inline">
@@ -61,95 +63,17 @@
             </div>
           </form>
 
-          <!-- Founded song part -->
-          <div
-            class="row mx-1 mt-4 bg-body shadow border border-dark rounded shadow-sm ts opacity-0 position-relative overflow-hidden justify-content-center"
-            :class="foundedSongClass"
-            :style="foundedSongStyle"
-          >
-            <div class="col-12 col-lg-7 mt-3 mt-lg-0 order-2 order-lg-1">
-              <h5>Song Name</h5>
-              <p class="ms-2 fs-5">{{ songName }}</p>
-
-              <hr class="border-primary" />
-              <h5 class="pt-2">Song Author</h5>
-              <p class="ms-2 fs-5">{{ songAuthor }}</p>
-
-              <hr class="border-primary" />
-              <h5 class="pt-2">Song Length</h5>
-              <p class="ms-2 fs-5">{{ videoLenght }}.</p>
-            </div>
-            <div
-              class="col-12 col-lg-5 order-1 order-lg-2 d-flex align-items-center"
-            >
-              <img class="img-fluid rounded shadow" :src="videoBanner" alt="" />
-            </div>
-            <div class="col-12 order-3">
-              <div class="row">
-                <hr class="mt-2" />
-                <!-- convert button -->
-                <div
-                  v-if="stage == 'videoFound'"
-                  class="col12 d-flex justify-content-center"
-                >
-                  <button
-                    class="btn btn-danger"
-                    type="button"
-                    @click="convertMusic"
-                  >
-                    Convert
-                  </button>
-                </div>
-                <!-- convert button end -->
-
-                <!-- progress bar -->
-                <div
-                  v-else-if="stage == 'converting'"
-                  class="col12 d-flex justify-content-center mt-2"
-                >
-                  <div class="row w-100 px-0 mx-0">
-                    <div class="col-2 px-0">
-                      <div class="text-center">{{ conversionProgress }}%</div>
-                    </div>
-
-                    <div class="col-10 px-0">
-                      <div class="w-100">
-                        <div
-                          class="progress"
-                          role="progressbar"
-                          :aria-valuenow="conversionProgress"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style="height: 25px"
-                        >
-                          <div
-                            class="progress-bar progress-bar-striped progress-bar-animated text-dark fs-5 bg-danger"
-                            :style="{ width: conversionProgress + '%' }"
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- progress bar end -->
-
-                <!-- download button -->
-                <div
-                  v-else-if="stage == 'converted'"
-                  class="col12 d-flex justify-content-center mt-2"
-                >
-                  <button
-                    class="btn btn-danger"
-                    type="button"
-                    @click="downloadMusic"
-                  >
-                    Download
-                  </button>
-                </div>
-                <!-- download button end -->
-              </div>
-            </div>
-          </div>
+          <!-- founded song part -->
+          <founded-song
+            :song-name="songName"
+            :song-author="songAuthor"
+            :video-lenght="videoLenght"
+            :video-banner="videoBanner"
+            :stage="stage"
+            :conversion-progress="conversionProgress"
+            @convert-music="convertMusic"
+            @download-music="downloadMusic"
+          ></founded-song>
         </div>
       </div>
     </div>
@@ -176,9 +100,10 @@ const apiUrl = `${serverUrl}/api`;
 import navigationBar from "./components/layout/NaivgationBar.vue";
 import footerLayout from "./components/layout/FooterLayout.vue";
 import coverLayout from "./components/layout/CoverLayout.vue";
+import foundedSong from "./components/main/FoundedSong.vue";
 
 export default {
-  components: { navigationBar, footerLayout, coverLayout },
+  components: { navigationBar, footerLayout, coverLayout, foundedSong },
 
   data() {
     return {
@@ -411,8 +336,6 @@ export default {
         });
       });
 
-      console.log(response);
-
       // download operation with virtual link
       if (response.status && response.data) {
         // Create a Blob from the response data
@@ -460,27 +383,6 @@ export default {
   },
 
   computed: {
-    foundedSongClass() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
-      const state = acceptedStages.includes(this.stage);
-
-      return {
-        "opacity-100": state,
-        invisible: !state,
-        "p-3": state,
-      };
-    },
-
-    foundedSongStyle() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
-      const state = acceptedStages.includes(this.stage);
-
-      return {
-        left: state ? "0px" : "-50px",
-        height: !state ? "0px" : "auto",
-      };
-    },
-
     bodyBgClass() {
       const state = this.themeMode == "light" ? true : false;
       return {
