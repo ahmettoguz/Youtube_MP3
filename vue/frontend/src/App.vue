@@ -1,26 +1,28 @@
+<!-- eslint-disable -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container bg-body min-vh-100 shadow-lg">
+    <section id="section" class="py-3">
+      <h3 class="text-center">Project List</h3>
+      <h4 class="text-center mb-4">Local Component</h4>
+      <div class="row flex-column align-items-center py-2">
+        <!-- <first-component></first-component>
+        <second-component></second-component> -->
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+"use strict";
+// import secondComponent from "./components/SecondComponent.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  // components: {
+  //   "second-component": secondComponent,
+  // },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data() {
+    return {};
+  },
+};
+</script>
