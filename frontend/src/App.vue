@@ -94,7 +94,7 @@ import $ from "jquery";
 import commonService from "./service/commonService.js";
 import clientWebsocketService from "./service/clientWebsocketService.js";
 
-const hostName = process.env.VUE_APP_HOST || "localhost";
+const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
 const serverPort = process.env.VUE_APP_SERVER_PORT || "80";
 const serverUrl = `http://${hostName}:${serverPort}`;
 const apiUrl = `${serverUrl}/api`;
