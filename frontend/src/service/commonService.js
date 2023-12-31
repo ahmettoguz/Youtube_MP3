@@ -1,3 +1,4 @@
+/* eslint-disable */
 class CommonService {
   async waitUntil(condition, maxTimeout, interval) {
     return new Promise((resolve, reject) => {

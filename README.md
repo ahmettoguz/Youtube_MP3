@@ -1,3 +1,5 @@
-Make button disabled when search in html and vue.
+edit .env.txt file as .env and configure host name of the backend.
 
-convert addClass and removeClass.
+start backend with npm run start
+
+start frontend with npm run serve

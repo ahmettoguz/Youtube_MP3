@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use strict";
 
 class ClientWebsocketService {
@@ -14,7 +15,10 @@ class ClientWebsocketService {
   connectWebsocket(errorCallback) {
     return new Promise((resolve, reject) => {
       try {
-        this.webSocket = new WebSocket(`ws://localhost:8080`);
+        const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
+        const websocketPort =
+          process.env.VUE_APP_SERVER_WEBSOCKET_PORT || "8080";
+        this.webSocket = new WebSocket(`ws://${hostName}:${websocketPort}`);
 
         this.webSocket.onopen = () => {
           this.connectionStatus = true;

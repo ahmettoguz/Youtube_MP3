@@ -1,11 +1,112 @@
-"use strict";
-import commonService from "./commonService.js";
-import clientWebsocketService from "./clientWebsocketService.js";
+<!-- eslint-disable -->
+<template>
+  <div :class="bodyBgClass" class="ts">
+    <!-- navigation component -->
+    <navigation-bar
+      :theme-mode="themeMode"
+      @toggle-theme-mode="toggleThemeMode"
+    ></navigation-bar>
 
-const serverUrl = "http://localhost";
+    <!-- main parts -->
+    <div class="container py-5 bg-body-tertiary shadow-lg min-vh-100">
+      <!-- header part -->
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="./assets/img/favicon.png" height="50" class="pe-3" />
+        <h1 class="mb-4 pt-5 pt-sm-3 text-center d-inline">
+          Youtube Downloader
+        </h1>
+      </div>
+
+      <div class="row justify-content-center h-100">
+        <div class="col-sm-10 col-md-8 col-lg-7">
+          <form id="form">
+            <div class="row justify-content-center">
+              <div class="col-7 col-sm-8 col-lg-6">
+                <input
+                  type="search"
+                  class="form-control"
+                  :class="videoUrlInputValidationClass"
+                  v-model="videoUrlInput"
+                  placeholder="Video Url"
+                />
+                <div class="invalid-feedback">Video url is not valid!</div>
+                <div class="valid-feedback">Video url is valid.</div>
+              </div>
+
+              <div
+                class="col-sm-4 col-lg-2 ts"
+                :class="{
+                  'col-3': stage != 'searchingVideo',
+                  'col-5': stage == 'searchingVideo',
+                  'col-md-3': stage != 'searchingVideo',
+                  'col-lg-3': stage == 'searchingVideo',
+                }"
+              >
+                <button
+                  class="btn btn-danger"
+                  type="submit"
+                  @click.prevent="findMusic"
+                  :disabled="
+                    stage == 'searchingVideo' || serviceConnection != true
+                  "
+                >
+                  {{ stage != "searchingVideo" ? "Search" : "Searching" }}
+
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    :class="{ 'd-none': stage != 'searchingVideo' }"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- founded song part -->
+          <founded-song
+            :song-name="songName"
+            :song-author="songAuthor"
+            :video-lenght="videoLenght"
+            :video-banner="videoBanner"
+            :stage="stage"
+            :conversion-progress="conversionProgress"
+            @convert-music="convertMusic"
+            @download-music="downloadMusic"
+          ></founded-song>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer component -->
+    <footer-layout></footer-layout>
+
+    <!-- cover layout full page with loading gif -->
+    <cover-layout :service-connection="serviceConnection"></cover-layout>
+  </div>
+</template>
+
+<script>
+/* eslint-disable */
+"use strict";
+import $ from "jquery";
+
+import commonService from "./service/commonService.js";
+import clientWebsocketService from "./service/clientWebsocketService.js";
+
+const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
+const serverPort = process.env.VUE_APP_SERVER_PORT || "80";
+const serverUrl = `http://${hostName}:${serverPort}`;
 const apiUrl = `${serverUrl}/api`;
 
-Vue.createApp({
+import navigationBar from "./components/layout/NaivgationBar.vue";
+import footerLayout from "./components/layout/FooterLayout.vue";
+import CoverLayout from "./components/layout/CoverLayout.vue";
+import foundedSong from "./components/main/FoundedSong.vue";
+
+export default {
+  components: { navigationBar, footerLayout, CoverLayout, foundedSong },
+
   data() {
     return {
       serviceConnection: "initial",
@@ -237,8 +338,6 @@ Vue.createApp({
         });
       });
 
-      console.log(response);
-
       // download operation with virtual link
       if (response.status && response.data) {
         // Create a Blob from the response data
@@ -286,36 +385,6 @@ Vue.createApp({
   },
 
   computed: {
-    foundedSongClass() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
-      const state = acceptedStages.includes(this.stage);
-
-      return {
-        "opacity-100": state,
-        invisible: !state,
-        "p-3": state,
-      };
-    },
-
-    foundedSongStyle() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
-      const state = acceptedStages.includes(this.stage);
-
-      return {
-        left: state ? "0px" : "-50px",
-        height: !state ? "0px" : "auto",
-      };
-    },
-
-    themeIconClass() {
-      const state = this.themeMode == "light" ? true : false;
-
-      return {
-        "fa-brightness": state,
-        "fa-moon": !state,
-      };
-    },
-
     bodyBgClass() {
       const state = this.themeMode == "light" ? true : false;
       return {
@@ -360,4 +429,27 @@ Vue.createApp({
       }, 1000);
     }
   },
-}).mount("#app");
+};
+</script>
+
+<style>
+.ts {
+  transition: 200ms ease;
+}
+</style>
+
+<style scoped>
+/* body */
+.dark-body-bg {
+  background-size: 22%;
+  background-position: 9% -40%;
+  /* background-image: url(../img/bg-memphis-dark.jpg); */
+  background-image: url(./assets/img/bg-memphis-dark.jpg);
+}
+
+.light-body-bg {
+  background-size: 30%;
+  background-image: url(./assets/img/bg-memphis-light.jpg);
+}
+/* body end */
+</style>
