@@ -1,3 +1,14 @@
+technologies
+vue
+nodejs
+ajax
+---
+dependencies nodejs
+---
+go backend and frontned file and download dependencies
+
+npm i
+
 edit .env.txt file as .env and configure host name of the backend.
 
 start backend with npm run start

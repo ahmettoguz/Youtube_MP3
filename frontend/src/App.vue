@@ -216,7 +216,7 @@ export default {
       this.userLocalId = localStorage.getItem("ytmp3Id");
 
       // if not set new one
-      if (this.userLocalId == null)
+      if (this.userLocalId == null || this.userLocalId == "null")
         localStorage.setItem("ytmp3Id", commonService.generateRandomWord());
     },
 
