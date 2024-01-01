@@ -114,7 +114,7 @@ export default {
       videoUrlInputValidation: "neutral",
       userLocalId: null,
       videoBanner: null,
-      convertedSongName: null,
+      convertedSongId: null,
       songName: null,
       songAuthor: null,
       videoLenght: null,
@@ -156,7 +156,6 @@ export default {
         this.stage = "videoFound";
 
         // get informations
-        this.convertedSongName = data.convertedSongName;
         this.videoBanner = data.imgUrl;
         this.songName = data.songName;
         this.songAuthor = data.songAuthor;
@@ -207,6 +206,9 @@ export default {
         alert("Convertion cannot performed!");
         return;
       }
+
+      // save converted song id
+      this.convertedSongId = response.data.data.convertedSongId;
     },
 
     async handleUserId() {
@@ -325,7 +327,7 @@ export default {
             responseType: "blob",
           },
           data: JSON.stringify({
-            musicName: this.convertedSongName,
+            convertedSongId: this.convertedSongId,
           }),
           beforeSend: () => {},
           success: function (data) {

@@ -22,7 +22,9 @@ const getUrlInfo = async (req, res) => {
   }
 
   // return response
-  return expressService.returnResponse(res, 200, status.message, songId);
+  return expressService.returnResponse(res, 200, status.message, {
+    convertedSongId: songId,
+  });
 };
 
 module.exports = getUrlInfo;
