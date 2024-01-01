@@ -18,7 +18,7 @@ class YtService {
       let songName = null;
       let songAuthor = null;
       if (info.title.split(" - ")[1] != undefined) {
-        songName = info.title.split(" - ")[1];
+        songName = info.title.split(" - ").slice(1).join(" - ");
         songAuthor = info.title.split(" - ")[0];
       } else {
         songName = info.title.split(" - ")[0];
