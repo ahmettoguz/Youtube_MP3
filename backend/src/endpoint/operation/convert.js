@@ -9,13 +9,12 @@ const getUrlInfo = async (req, res) => {
   const userId = commonService.getHeaderValue(req, "user-id");
 
   // Check if the user's folder exists, and create it if not
-  const userFolderPath = path.join(__dirname, "../../storage", `./${userId}`);
+  const songId = commonService.generateRandomWord();
+  const userFolderPath = path.join(__dirname, "../../storage", userId, songId);
   fileService.createFolderIfNotExist(userFolderPath);
 
   // start download
-  const status = await ytService.downloadToServer(
-    path.join(userFolderPath)
-  );
+  const status = await ytService.downloadToServer(path.join(userFolderPath));
 
   // check state and return response
   if (status.state !== true) {
@@ -23,7 +22,7 @@ const getUrlInfo = async (req, res) => {
   }
 
   // return response
-  return expressService.returnResponse(res, 200, status.message);
+  return expressService.returnResponse(res, 200, status.message, songId);
 };
 
 module.exports = getUrlInfo;
