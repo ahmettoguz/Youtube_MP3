@@ -3,6 +3,7 @@ const commonService = require("../../service/commonService");
 const ytService = require("../../service/ytService");
 const fileService = require("../../service/fileService");
 const httpService = require("../../service/httpService");
+const imageService = require("../../service/imageService");
 const path = require("path");
 
 const getUrlInfo = async (req, res) => {
@@ -28,9 +29,22 @@ const getUrlInfo = async (req, res) => {
     return expressService.returnResponse(
       res,
       500,
-      "Cover page cannot donwloaded."
+      "Cover page cannot downloaded."
     );
   }
+
+  // convert webp image to png image
+  const convertStatus = await imageService.convertWebpToPng(
+    path.join(userFolderPath, "./cover.webp"),
+    path.join(userFolderPath, "./cover.png")
+  );
+
+  if (!convertStatus)
+    return expressService.returnResponse(
+      res,
+      500,
+      "Cover page cannot converted from webp to png."
+    );
 
   // start download
   const status = await ytService.downloadToServer(path.join(userFolderPath));
