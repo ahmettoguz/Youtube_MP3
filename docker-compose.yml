@@ -2,6 +2,7 @@ version: '3'
 services:
   backend:
     build: ./backend
+    image: backend-i
     container_name: backend-c
     volumes:
       - ./backend:/app
