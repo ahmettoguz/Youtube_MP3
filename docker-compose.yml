@@ -1,7 +1,8 @@
-version: "3"
+version: '3'
 services:
   backend:
     build: ./backend
+    container_name: backend-c
     volumes:
       - ../backend:/app
     ports:
