@@ -4,6 +4,6 @@ services:
     build: ./backend
     container_name: backend-c
     volumes:
-      - ../backend:/app
+      - ./backend:/app
     ports:
       - "3000:3000"
