@@ -5,8 +5,8 @@ services:
     build: ./backend
     image: backend-i
     container_name: backend-c
-    volumes:
-      - ./backend/src:/app/src
+    # volumes:
+    #   - ./backend/src:/app/src
     ports:
       - "2400:2400"
       - "2480:2480"
@@ -16,8 +16,8 @@ services:
     build: ./frontend
     image: frontend-i
     container_name: frontend-c
-    volumes:
-      - ./frontend/dist:/usr/share/nginx/html
+    # volumes:
+    #   - ./frontend/dist:/usr/share/nginx/html
     ports:
       - "80:80"
     restart: always
