@@ -90,12 +90,13 @@
 /* eslint-disable */
 "use strict";
 import $ from "jquery";
+import axios from "axios";
 
 import commonService from "./service/commonService.js";
 import clientWebsocketService from "./service/clientWebsocketService.js";
 
 const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
-const serverPort = process.env.VUE_APP_SERVER_PORT || "80";
+const serverPort = process.env.VUE_APP_SERVER_PORT || "3000";
 const serverUrl = `http://${hostName}:${serverPort}`;
 const apiUrl = `${serverUrl}/api`;
 
@@ -130,23 +131,24 @@ export default {
       this.videoUrlInputValidation = "neutral";
 
       const response = await new Promise((resolve, reject) => {
-        $.ajax({
+        axios({
+          method: "post",
           url: `${apiUrl}/getUrlInfo`,
-          type: "POST",
-          contentType: "application/json",
+          headers: { "Content-Type": "application/json" },
           data: JSON.stringify({
             url: this.videoUrlInput,
           }),
-          beforeSend: () => {
+
+          onUploadProgress: () => {
             this.stage = "searchingVideo";
           },
-          success: function (data) {
-            resolve({ status: true, data: data });
-          },
-          error: function (error) {
+        })
+          .then((response) => {
+            resolve({ status: true, data: response.data });
+          })
+          .catch((error) => {
             resolve({ status: false });
-          },
-        });
+          });
       });
 
       if (response.status) {
@@ -185,23 +187,25 @@ export default {
       this.conversionProgress = 0;
 
       const response = await new Promise((resolve, reject) => {
-        $.ajax({
+        axios({
+          method: "post",
           url: `${apiUrl}/convertUrl`,
-          type: "POST",
-          contentType: "application/json",
+          headers: {
+            "Content-Type": "application/json",
+            "User-Id": this.userLocalId,
+          },
           data: JSON.stringify({
             videoBanner: this.videoBanner,
           }),
-          headers: {
-            "User-Id": this.userLocalId,
-          },
-          success: function (data) {
-            resolve({ status: true, data: data });
-          },
-          error: function (error) {
+
+          onUploadProgress: () => {},
+        })
+          .then((response) => {
+            resolve({ status: true, data: response.data });
+          })
+          .catch((error) => {
             resolve({ status: false });
-          },
-        });
+          });
       });
 
       if (response.status == false) {
@@ -252,21 +256,21 @@ export default {
 
       // send request to endpoint to receive healthcheck
       await new Promise((resolve, reject) => {
-        $.ajax({
+        axios({
+          method: "get",
           url: `${serverUrl}/health-check/websocket`,
-          type: "GET",
-          contentType: "application/json",
           headers: {
+            "Content-Type": "application/json",
             "User-Id": this.userLocalId,
           },
           data: JSON.stringify({}),
-          success: function (data) {
-            resolve({ state: true, data: data });
-          },
-          error: function (error) {
-            resolve({ state: false });
-          },
-        });
+        })
+          .then((response) => {
+            resolve({ status: true, data: response.data });
+          })
+          .catch((error) => {
+            resolve({ status: false });
+          });
       });
 
       // wait websocket message with waitUntil
@@ -294,21 +298,21 @@ export default {
 
     async checkServerConnectivity() {
       const response = await new Promise((resolve, reject) => {
-        $.ajax({
+        axios({
+          method: "get",
           url: `${serverUrl}/health-check/backend`,
-          type: "GET",
-          contentType: "application/json",
+          headers: { "Content-Type": "application/json" },
           data: JSON.stringify({}),
-          success: function (data) {
-            resolve({ state: true, data: data });
-          },
-          error: function (error) {
-            resolve({ state: false });
-          },
-        });
+        })
+          .then((response) => {
+            resolve({ status: true, data: response.data });
+          })
+          .catch((error) => {
+            resolve({ status: false });
+          });
       });
 
-      if (!response.state) {
+      if (!response.status) {
         return false;
       }
 
@@ -318,28 +322,26 @@ export default {
 
     async downloadMusic() {
       const response = await new Promise((resolve, reject) => {
-        $.ajax({
+        axios({
+          method: "post",
           url: `${apiUrl}/download`,
-          type: "POST",
-          contentType: "application/json",
           headers: {
+            "Content-Type": "application/json",
             "User-Id": this.userLocalId,
-          },
-          xhrFields: {
-            responseType: "blob",
           },
           data: JSON.stringify({
             convertedSongId: this.convertedSongId,
           }),
-          beforeSend: () => {},
-          success: function (data) {
-            resolve({ status: true, data: data });
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            console.error("AJAX request failed:", textStatus, errorThrown);
+          responseType: "blob",
+
+          onUploadProgress: () => {},
+        })
+          .then((response) => {
+            resolve({ status: true, data: response.data });
+          })
+          .catch((error) => {
             resolve({ status: false });
-          },
-        });
+          });
       });
 
       // download operation with virtual link

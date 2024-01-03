@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+  backend:
+    build: ./backend
+    image: backend-i
+    container_name: backend-c
+    # volumes:
+    #   - ./backend/src:/app/src
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    restart: always
+
+  frontend:
+    build: ./frontend
+    image: frontend-i
+    container_name: frontend-c
+    # volumes:
+    #   - ./frontend/dist:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    restart: always
+    # stdin_open: true
+    # tty: true
+    depends_on:
+      - backend
