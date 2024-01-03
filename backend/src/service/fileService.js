@@ -48,7 +48,6 @@ class FileService {
   }
 
   findMp3File(files) {
-    console.log(files);
     return files.find((str) => str.endsWith(".mp3"));
   }
 }
