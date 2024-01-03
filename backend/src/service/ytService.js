@@ -59,7 +59,7 @@ class YtService {
 
       // set last progress
       this.lastDownloadProgress = this.downloadProgress;
-      console.log("Converting:", this.downloadProgress, "%");
+      console.log("Converting:", this.downloadProgress + "%");
     }
   };
 
