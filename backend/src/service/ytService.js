@@ -59,7 +59,7 @@ class YtService {
 
       // set last progress
       this.lastDownloadProgress = this.downloadProgress;
-      console.log(this.downloadProgress);
+      console.log("Converting:", this.downloadProgress, "%");
     }
   };
 
@@ -74,7 +74,7 @@ class YtService {
       }
     );
 
-    console.log("convert finished");
+    console.log("Convert finished");
   };
 
   async downloadToServer(filePath) {

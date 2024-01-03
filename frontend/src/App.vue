@@ -157,8 +157,8 @@ export default {
 
         // get informations
         this.videoBanner = data.imgUrl;
-        this.songName = data.songName;
-        this.songAuthor = data.songAuthor;
+        this.songName = commonService.capitalizeFirstLetter(data.songName);
+        this.songAuthor = commonService.capitalizeFirstLetter(data.songAuthor);
         this.videoLenght = data.songLength;
 
         // display label for input field
