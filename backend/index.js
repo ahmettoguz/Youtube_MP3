@@ -5,7 +5,7 @@ const app = runApp();
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () =>
   console.info(`App is running on : http://localhost:${PORT}`)
 );

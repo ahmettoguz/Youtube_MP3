@@ -82,6 +82,6 @@ class ServerWebsocketService {
 }
 
 const serverWebsocketService = new ServerWebsocketService(
-  process.env.WEBSOCKET_PORT
+  process.env.WEBSOCKET_PORT || 8080
 );
 module.exports = serverWebsocketService;
