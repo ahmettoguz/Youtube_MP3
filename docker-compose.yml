@@ -21,3 +21,7 @@ services:
     ports:
       - "80:80"
     restart: always
+    # stdin_open: true
+    # tty: true
+    depends_on:
+      - backend
