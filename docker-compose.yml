@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   backend:
     build: ./backend
     image: backend-i
@@ -7,5 +8,16 @@ services:
     volumes:
       - ./backend/src:/app/src
     ports:
-      - "3000:2400"
+      - "2400:2400"
+      - "2480:2480"
+    restart: always
+
+  frontend:
+    build: ./frontend
+    image: frontend-i
+    container_name: frontend-c
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html
+    ports:
+      - "80:80"
     restart: always
