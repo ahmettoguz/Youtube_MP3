@@ -5,6 +5,6 @@ services:
     image: backend-i
     container_name: backend-c
     volumes:
-      - ./backend:/app
+      - ./backend/src:/app/src
     ports:
       - "3000:2400"
