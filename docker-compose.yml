@@ -11,9 +11,6 @@ services:
       - "3000:3000"
       - "8080:8080"
     restart: always
-    networks:
-      - appnetwork
-
 
   frontend:
     build: ./frontend
@@ -28,8 +25,3 @@ services:
     # tty: true
     depends_on:
       - backend
-    networks:
-      - appnetwork
-
-networks:
-  appnetwork:
