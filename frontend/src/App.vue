@@ -300,7 +300,8 @@ export default {
       const response = await new Promise((resolve, reject) => {
         axios({
           method: "get",
-          url: `${serverUrl}/health-check/backend`,
+          // url: `${serverUrl}/health-check/backend`,
+          url: `http://backend:3000/health-check/backend`,
           headers: { "Content-Type": "application/json" },
           data: JSON.stringify({}),
         })
