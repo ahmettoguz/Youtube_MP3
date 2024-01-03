@@ -8,8 +8,8 @@ services:
     # volumes:
     #   - ./backend/src:/app/src
     ports:
-      - "2400:3000"
-      - "2480:8080"
+      - "3000:3000"
+      - "8080:8080"
     restart: always
 
   frontend:
