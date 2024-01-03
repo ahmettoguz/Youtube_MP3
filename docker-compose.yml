@@ -9,5 +9,5 @@ services:
     ports:
       - "3000:2400"
     restart: 
-      condition: always
+      condition: "always"
       max_attempts: 5
