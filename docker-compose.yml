@@ -8,5 +8,6 @@ services:
       - ./backend/src:/app/src
     ports:
       - "3000:2400"
-    restart: always
-    restart_max_retries: 10
+    restart: 
+      condition: always
+      max_attempts: 5
