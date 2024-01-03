@@ -46,6 +46,10 @@ class FileService {
       return { status: false };
     }
   }
+
+  findMp3File(files) {
+    return files.find((str) => str.endsWith(".mp3"));
+  }
 }
 
 const fileService = new FileService();

@@ -189,7 +189,9 @@ export default {
           url: `${apiUrl}/convertUrl`,
           type: "POST",
           contentType: "application/json",
-          data: JSON.stringify({}),
+          data: JSON.stringify({
+            videoBanner: this.videoBanner,
+          }),
           headers: {
             "User-Id": this.userLocalId,
           },
