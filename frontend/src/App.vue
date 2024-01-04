@@ -11,9 +11,11 @@
     <div class="container py-5 bg-body-tertiary shadow-lg min-vh-100">
       <!-- header part -->
       <div class="d-flex justify-content-center align-items-center">
-        <img src="./assets/img/favicon.png" height="50" class="pe-3" />
-        <h1 class="mb-4 pt-5 pt-sm-3 text-center d-inline">
-          Youtube Downloader
+        <img src="./assets/img/favicon.png" height="50" class="pe-2 pe-sm-3" />
+        <h1
+          class="mb-4 pt-4 pt-sm-3 text-center text-nowrap"
+        >
+          Youtube MP3 Converter
         </h1>
       </div>
 
@@ -95,7 +97,7 @@ import axios from "axios";
 import commonService from "./service/commonService.js";
 import clientWebsocketService from "./service/clientWebsocketService.js";
 
-const hostName = process.env.VUE_APP_SERVER_HOST || "backend";
+const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
 const serverPort = process.env.VUE_APP_SERVER_PORT || "3000";
 const serverUrl = `http://${hostName}:${serverPort}`;
 const apiUrl = `${serverUrl}/api`;
