@@ -8,13 +8,18 @@
     ></navigation-bar>
 
     <!-- main parts -->
-    <div class="container py-5 bg-body-tertiary shadow-lg min-vh-100">
+    <div
+      class="container pt-5 bg-body-tertiary shadow-lg min-vh-100"
+      :class="{
+        'pb-5': stage != 'searchingVideo' && stage != 'initial',
+      }"
+    >
+      <!-- extra space -->
+      <div class="pt-2"></div>
       <!-- header part -->
       <div class="d-flex justify-content-center align-items-center">
         <img src="./assets/img/favicon.png" height="50" class="pe-2 pe-sm-3" />
-        <h1
-          class="mb-4 pt-4 pt-sm-3 text-center text-nowrap"
-        >
+        <h1 class="mb-4 pt-4 pt-sm-3 text-center text-nowrap">
           Youtube MP3 Converter
         </h1>
       </div>
