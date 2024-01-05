@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Specify the content with new lines
+content="-----BEGIN CERTIFICATE-----
+MIIDhTCCAm2gAwIBAgIEbTvOtDANBgkqhkiG9w0BAQsFADBbMScwJQYDVQQDDB5SZWdlcnkgU2Vs
+Zi1TaWduZWQgQ2VydGlmaWNhdGUxIzAhBgNVBAoMGlJlZ2VyeSwgaHR0cHM6Ly9yZWdlcnkuY29t
+MQswCQYDVQQGEwJVQTAgFw0yNDAxMDUwMDAwMDBaGA8yMTI0MDEwNTE0NDg1MFowRzETMBEGA1UE
+AwwKYXNkZnNkLmNvbTEjMCEGA1UECgwaUmVnZXJ5LCBodHRwczovL3JlZ2VyeS5jb20xCzAJBgNV
+BAYTAlVBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqEkq50zTMJUF9ycaFgsmC8uJ
+nUG2ZDWrGfgUbK9EqmxyItWAhqhSX+uzeA1e2SYCVJhHsFDFUGQJhhuDit7gTrcsqtM8uJ6UYS21
+WAFdnKIEgIfZL1+T3HIzEo6A28q0Qs7lt6SG9d8iTmUnVNsJx0xy3J+jsUba7U4KmraFqyJ6Y4yw
+gk+2uLGb5TnoDbsUHQXwA1rRHIryP42baYDDYACG+SQqunzdvaK3HLBRsWk176QNvWWxedg3Vgfu
+Rl/VdBzLlElg3r2CTG73WdbZT/H5xzi6Kyt3PgSfZIjAEeNhzEg0MSYSbXH7aTzXcO9Qa0kRd5IS
+FUtHLUefGosRawIDAQABo2MwYTAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjAdBgNV
+HQ4EFgQU0m/kS2vxpoCrVF6FPVTgW2vvjaUwHwYDVR0jBBgwFoAU0m/kS2vxpoCrVF6FPVTgW2vv
+jaUwDQYJKoZIhvcNAQELBQADggEBAGpiAUvJXjW8LNkJfUKZZZWQwU+w9VtKSUyvhe0mJtcRNl27
+rJhX+Gv1K7H4vRaIIzvd/WHImAUoY4B6ISGTTuiHL2WJwylmt7iKi74ZGCeCj05/rQQ/7mmfXdAy
+34b4trZGzLXKEfmY7zqrczJpl6FV98MnqFjXMCuraMyeVQpBIVOy8HTlItA5c9aMoS0sNkz87hA9
+wbgqHxoUJPX+K2Ql+WWvQg49O1HEAKDIB5KIjH87yHWutpoajNOfRrNXWTCpQXndmDtbzAptiT2N
+3XBglC1YFAuy/2jkhccv2c78aj7v99pRYGKVBNRpadM7jpz38T3r6UM2lc4VhaF+3bk=
+-----END CERTIFICATE-----
+"
+
+# Specify the file name
+file_name="fullchain.pem"
+
+# Write the content to the file
+echo -e "$content" > "$file_name"
+
+# ------------------------------------------------------------------------
+unset content
+unset file_name
+
+
+# Specify the content with new lines
+content="-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAqEkq50zTMJUF9ycaFgsmC8uJnUG2ZDWrGfgUbK9EqmxyItWA
+hqhSX+uzeA1e2SYCVJhHsFDFUGQJhhuDit7gTrcsqtM8uJ6UYS21WAFdnKIEgIfZ
+L1+T3HIzEo6A28q0Qs7lt6SG9d8iTmUnVNsJx0xy3J+jsUba7U4KmraFqyJ6Y4yw
+gk+2uLGb5TnoDbsUHQXwA1rRHIryP42baYDDYACG+SQqunzdvaK3HLBRsWk176QN
+vWWxedg3VgfuRl/VdBzLlElg3r2CTG73WdbZT/H5xzi6Kyt3PgSfZIjAEeNhzEg0
+MSYSbXH7aTzXcO9Qa0kRd5ISFUtHLUefGosRawIDAQABAoIBABComYonBTrobZw/
+LypidSQyxE8gW6VE2Mir0Z3GpdX3AT9ogh4SWIEtTGlEbZCyXgWww1v1Sur/1B+F
+5rofAPZZ1J6eZYLjE84g37Q0AmfIdAijKgEyBWmLlnmuSJw5TynT4FKTA1cgfP1k
+rwWL30Zuz2n+lY4tdOuLz6nsCoRbrgFBPLZfu5RDbZ7nwGFRVAR4BFD8508InfQL
+w2l0MGUUJ7MCnm+YpZ7mgP4xfdhA4/YU+akaBmwOtvTBAcyHYiWqg1QYD04RnLXM
++BWA16EtnS3wpI6co9GVDmtwCHu2O7L5X6zP5gv3Z+/nt+MwFz/3F/m52yryV++7
+inWRHcUCgYEA/CNoDOze8Q2aO2rFJ6rvd5DwLVia+L0n+7eKmPcFlxzAfO9o5rYe
+0xX1AVeAwiBU2PRXelRISjJgRll2Hr9XbZFVS1waCtT+A4kBApDn15499XSx2I7e
+sOOHVs1/Amdlb6TsPEPoou4SRCNEmvOU+Ve13IjUxse7Hii9l0cBHiUCgYEAqtz9
+MxPVrKuVk3zUJ95Masaag5bVOJl5sVnBaHvFJcfV4SaBYRdJD085Eap9yiz1fyLD
+GwiHKBmC6Sy2fLLOm+SRhOQti2xNzGfGgpZZIWFQAoZYdMS4K1gHLZ51X12OINPM
+e/RH4N92SocSyBrICvR3ctpshc+a0bVXxSJCdE8CgYEAyOOM639uwbCMyfpvywMu
+eJ1KP1bxYm2ThcLe8rEeCyAlXWWCtw8z0AsWglMti34nHBTR/e1ZC4THoEV3D1h0
+WCALTVe8iBTbrgVigKDjl6/EveSULm7mjxk5o7dnEos/Dozgi8OvfuEgPJm895hL
+gb6Yb3W10gsg0w6yv+0avuECgYAiZVRPWPnVxcDZrPJkiDqn8A0g2ldYCoVV73Sg
+3PGmFmF27rJy4iYh/9fEN6cU8RIGou/V3FSg/Om+mPKvjatL9Kparzh/7bCHqohq
+t2t/7cAWkgbykrtkdlcTlueX6BR5hUmP1nA106ZTgHeGcuW8VtRI+bGJCm7nMnNV
+yvzHvwKBgEav6TJTwJpb3CnafhNZZpzRzwa/PPTcJNClAqKMuO+gKdtiFreL3cwo
++81mAg1WWSXkxjbo7VFs7281XkjNKDz0ATZIH1SuN+p0EUGuMLUESR3WJRLk69sW
+H2fwysimDW6q/mKVHE1jPXBz7KkTWn8lXrMd6Lnho8XUi7zIC1h6
+-----END RSA PRIVATE KEY-----
+"
+
+# Specify the file name
+file_name="privkey.pem"
+
+# Write the content to the file
+echo -e "$content" > "$file_name"
+
+echo "Dummy keys generated."
