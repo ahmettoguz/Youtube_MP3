@@ -1,6 +1,7 @@
 const WebSocket = require("ws");
 const dotenv = require("dotenv");
 const commonService = require("./commonService");
+const sslService = require("./sslService");
 
 dotenv.config();
 
@@ -10,7 +11,8 @@ class ServerWebsocketService {
     this.currentClientId = null;
     this.currentWs = null;
 
-    this.wsServer = new WebSocket.Server({ port: port });
+    this.wsServer = new WebSocket.Server({server: sslService.getHttpsServer()  , port: port });
+    // this.wsServer = new WebSocket.Server({ port: port });
     this.wsServer.on("connection", (ws) => {
       this.currentWs = ws;
       this.handleConnection(ws);

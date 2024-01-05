@@ -14,6 +14,7 @@ const isSslEnabled = true;
 
 if (isSslEnabled) {
   const httpsServer = https.createServer(sslService.getCredentials(), app);
+  sslService.setHttpsServer(httpsServer);
   httpsServer.listen(PORT, () =>
     console.log(`Server is running on https://localhost:${PORT}`)
   );
