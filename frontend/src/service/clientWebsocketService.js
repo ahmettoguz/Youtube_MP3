@@ -20,9 +20,6 @@ class ClientWebsocketService {
           process.env.VUE_APP_SERVER_WEBSOCKET_PORT || "8080";
         this.webSocket = new WebSocket(`wss://${hostName}:${websocketPort}`);
 
-        console.log(`wss://${hostName}:${websocketPort}`);
-        console.log(this.webSocket);
-
         this.webSocket.onopen = () => {
           this.connectionStatus = true;
           resolve({ state: true });

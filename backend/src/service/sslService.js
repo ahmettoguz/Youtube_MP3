@@ -4,7 +4,7 @@ const path = require("path");
 
 class SslService {
   constructor() {
-    this.httpsServer = null;
+    this.expressApp = null;
   }
 
   getCredentials() {
@@ -28,11 +28,12 @@ class SslService {
   }
 
   getHttpsServer(expressApp) {
+    this.expressApp = expressApp;
     return https.createServer(this.getCredentials(), expressApp);
   }
 
   getWssServer() {
-    return https.createServer(this.getCredentials());
+    return https.createServer(this.getCredentials(), this.expressApp);
   }
 }
 
