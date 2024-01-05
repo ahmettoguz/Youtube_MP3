@@ -33,12 +33,10 @@ docker-compose up -d --build
 
 docker ps -a
 
-docker logs nginx-c
-
 docker exec -it nginx-c /bin/bash
-
-mkdir /etc/nginx/sites-enabled/
 
 bash link.sh
 
 exit
+
+docker logs nginx-c

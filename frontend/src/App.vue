@@ -104,7 +104,7 @@ import clientWebsocketService from "./service/clientWebsocketService.js";
 
 const hostName = process.env.VUE_APP_SERVER_HOST || "localhost";
 const serverPort = process.env.VUE_APP_SERVER_PORT || "3000";
-const serverUrl = `https://${hostName}:${serverPort}`;
+const serverUrl = `http://${hostName}:${serverPort}`;
 const apiUrl = `${serverUrl}/api`;
 
 import navigationBar from "./components/layout/NaivgationBar.vue";
