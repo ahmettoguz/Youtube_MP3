@@ -6,7 +6,7 @@ const httpService = require("../../service/httpService");
 const imageService = require("../../service/imageService");
 const path = require("path");
 
-const getUrlInfo = async (req, res) => {
+const convert = async (req, res) => {
   // get user id to use folder
   const userId = commonService.getHeaderValue(req, "user-id");
 
@@ -47,7 +47,7 @@ const getUrlInfo = async (req, res) => {
     );
 
   // start download
-  const status = await ytService.downloadToServer(path.join(userFolderPath));
+  const status = await ytService.downloadToServer(req, path.join(userFolderPath));
 
   // check state and return response
   if (status.state !== true) {
@@ -60,4 +60,4 @@ const getUrlInfo = async (req, res) => {
   });
 };
 
-module.exports = getUrlInfo;
+module.exports = convert;
