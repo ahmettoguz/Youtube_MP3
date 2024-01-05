@@ -1,6 +1,5 @@
 const yt = require("yt-converter");
 const commonService = require("./commonService");
-const serverWebsocketService = require("./serverWebsocketService");
 
 class YtService {
   constructor() {
@@ -47,8 +46,8 @@ class YtService {
       this.lastDownloadProgress != 100
     ) {
       // send message to client with websocket
-      serverWebsocketService.sendMessageToClient(
-        serverWebsocketService.getCurrentClientId,
+      this.serverWebsocketService.sendMessageToClient(
+        this.serverWebsocketService.getCurrentClientId,
         {
           status: "converting",
           category: "convert",
@@ -65,8 +64,8 @@ class YtService {
 
   onCovertFinished = () => {
     // send message to client with websocket
-    serverWebsocketService.sendMessageToClient(
-      serverWebsocketService.getCurrentClientId,
+    this.serverWebsocketService.sendMessageToClient(
+      this.serverWebsocketService.getCurrentClientId,
       {
         status: "completed",
         category: "convert",
@@ -77,7 +76,9 @@ class YtService {
     console.log("Convert finished");
   };
 
-  async downloadToServer(filePath) {
+  async downloadToServer(req, filePath) {
+    this.serverWebsocketService = req.app.get("serverWebsocketService");
+
     this.downloadProgress = 0;
     this.lastDownloadProgress = 0;
     const status = await yt.convertAudio(

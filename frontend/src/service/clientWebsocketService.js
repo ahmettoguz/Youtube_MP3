@@ -26,7 +26,7 @@ class ClientWebsocketService {
         };
 
         this.webSocket.onerror = (error) => {
-          // console.error("WebSocket connection error:", error);
+          console.error("WebSocket connection error:", error);
           this.connectionStatus = false;
           resolve({ state: false });
         };

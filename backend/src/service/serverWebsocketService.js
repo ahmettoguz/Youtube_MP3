@@ -1,6 +1,7 @@
 const WebSocket = require("ws");
 const dotenv = require("dotenv");
 const commonService = require("./commonService");
+const sslService = require("./sslService");
 
 dotenv.config();
 
@@ -9,8 +10,10 @@ class ServerWebsocketService {
     this.clients = new Map();
     this.currentClientId = null;
     this.currentWs = null;
+  }
 
-    this.wsServer = new WebSocket.Server({ port: port });
+  startWsServer(httpsServer) {
+    this.wsServer = new WebSocket.Server({ server: httpsServer });
     this.wsServer.on("connection", (ws) => {
       this.currentWs = ws;
       this.handleConnection(ws);
@@ -81,7 +84,4 @@ class ServerWebsocketService {
   }
 }
 
-const serverWebsocketService = new ServerWebsocketService(
-  process.env.WEBSOCKET_PORT || 8080
-);
-module.exports = serverWebsocketService;
+module.exports = ServerWebsocketService;

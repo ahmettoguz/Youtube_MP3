@@ -22,8 +22,37 @@ line 69 node_modules\yt-converter\src\utils\convertAudio.js:
 convert that line as following:
         const pathname = path.resolve(process.cwd(), directoryDownload, `a.mp3`)
 ---
+cd ~
 
-cd Youtube_MP3_Converter/
+git clone https://github.com/ahmettoguz/Youtube_MP3_Converter
+
+
+# Backend ssl configs
+cd ~/Youtube_MP3_Converter/backend/src/keys
+
+bash placeKeys.sh
+
+cd ~/Youtube_MP3_Converter/
+---
+
+# Frontend connection configs
+cd ~/Youtube_MP3_Converter/frontend
+
+mv .env.txt .env
+
+nano .env
+---
+
+# nginx ssl configs
+
+cd ~/Youtube_MP3_Converter/nginx/ahmetproje.com.tr/keys
+
+bash placeKeys.sh
+
+---
+# Running Deployment
+
+cd ~/Youtube_MP3_Converter/
 
 docker-compose down
 
@@ -38,5 +67,7 @@ docker exec -it nginx-c /bin/bash
 bash link.sh
 
 exit
+
+docker ps -a
 
 docker logs nginx-c
