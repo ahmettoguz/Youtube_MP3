@@ -26,10 +26,6 @@ class SslService {
   getHttpsServer(expressApp) {
     return https.createServer(this.getCredentials(), expressApp);
   }
-
-  getWssServer(expressApp) {
-    return https.createServer(this.getCredentials(), expressApp);
-  }
 }
 
 const sslService = new SslService();
