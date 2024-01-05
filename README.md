@@ -23,9 +23,11 @@ convert that line as following:
         const pathname = path.resolve(process.cwd(), directoryDownload, `a.mp3`)
 ---
 
-docker-compose up -d --build
+git pull
 
 docker-compose down
+
+docker-compose up -d --build
 
 docker logs nginx-c
 
