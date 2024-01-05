@@ -9,12 +9,13 @@
 
     <!-- main parts -->
     <div
-      class="container pt-5 bg-body-tertiary shadow-lg min-vh-100"
+      class="container bg-body-tertiary shadow-lg min-vh-100"
       :class="{
         'pb-5': stage != 'searchingVideo' && stage != 'initial',
       }"
     >
       <!-- extra space -->
+      <div class="pt-5"></div>
       <div class="pt-2"></div>
       <!-- header part -->
       <div class="d-flex justify-content-center align-items-center">
