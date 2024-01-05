@@ -1,3 +1,4 @@
+const https = require("https");
 const fs = require("fs");
 const path = require("path");
 
@@ -26,12 +27,12 @@ class SslService {
     }
   }
 
-  setHttpsServer(httpsServer) {
-    this.httpsServer = httpsServer;
+  getHttpsServer(expressApp) {
+    return https.createServer(this.getCredentials, expressApp);
   }
 
-  getHttpsServer() {
-    return this.httpsServer;
+  getWssServer() {
+    return https.createServer(this.getCredentials);
   }
 }
 
