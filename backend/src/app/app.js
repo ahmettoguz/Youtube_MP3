@@ -6,7 +6,7 @@ const apiRoute = require("../route/apiRoute");
 const healthCheckRoute = require("../route/healthCheckRoute");
 const expressService = require("../service/expressService");
 
-const serverWebsocketService = require("../service/serverWebsocketService");
+const ServerWebsocketServiceClass = require("../service/serverWebsocketService");
 
 const runApp = () => {
   const app = express();
@@ -27,6 +27,7 @@ const runApp = () => {
   app.use("/api", expressService.displayRequestInfo, apiRoute);
 
   // set websocket service
+  const serverWebsocketService = new ServerWebsocketServiceClass(443);
   serverWebsocketService.startWsServer(app);
   app.set("serverWebsocketService", serverWebsocketService);
   return app;
