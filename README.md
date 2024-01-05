@@ -39,10 +39,6 @@ docker exec -it nginx-c /bin/bash
 
 mkdir /etc/nginx/sites-enabled/
 
-ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
-
-nginx -t
-
-service nginx reload
+bash link.sh
 
 exit

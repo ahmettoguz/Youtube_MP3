@@ -4,8 +4,10 @@
 if [ ! -d "/etc/nginx/sites-enabled/" ]; then
     mkdir -p "/etc/nginx/sites-enabled/"
 fi
-
+# ----------------------------------------------------------------------------------------------------
+# create links
 ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
+# ----------------------------------------------------------------------------------------------------
 
 # Check Nginx configuration
 if nginx -t ; then
@@ -15,5 +17,5 @@ else
    exit 1
 fi
 
-# Reload Nginx
+# reload Nginx
 service nginx reload
