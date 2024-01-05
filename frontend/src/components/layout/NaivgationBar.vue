@@ -1,7 +1,7 @@
 <template>
   <!-- nav start -->
   <nav
-    class="navbar navbar-expand-sm navbar-light bg-body-tertiary fixed-top p-1 p-sm-0"
+    class="navbar navbar-expand navbar-light bg-body-tertiary fixed-top p-1 p-sm-0"
   >
     <div class="container-fluid">
       <a class="navbar-brand m-md-0 ms-lg-5 p-0" href="./index.html">
@@ -11,6 +11,7 @@
           height="50"
           id="nav_Logo"
         />
+        <span class="ps-1"> Converter </span>
       </a>
       <button
         class="navbar-toggler"

@@ -22,4 +22,21 @@ line 69 node_modules\yt-converter\src\utils\convertAudio.js:
 convert that line as following:
         const pathname = path.resolve(process.cwd(), directoryDownload, `a.mp3`)
 ---
-docker-compose up --build
+
+cd Youtube_MP3_Converter/
+
+docker-compose down
+
+git pull
+
+docker-compose up -d --build
+
+docker ps -a
+
+docker exec -it nginx-c /bin/bash
+
+bash link.sh
+
+exit
+
+docker logs nginx-c

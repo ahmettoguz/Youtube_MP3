@@ -1,6 +1,6 @@
 <template>
   <!-- footer -->
-  <footer class="fixed-bottom" style="z-index: 9999">
+  <footer class="fixed-bottom">
     <a href="https://github.com/ahmettoguz" target="_blank"
       >Developed by Ahmet Oğuz Ergin</a
     >
@@ -11,7 +11,7 @@
 <style scoped>
 /* footer */
 footer {
-  opacity: 1;
+  z-index: 10;
   font-style: italic;
   font-family: "Montserrat", sans-serif;
   background: linear-gradient(90deg, gray -150%, black 50%, gray 250%);
