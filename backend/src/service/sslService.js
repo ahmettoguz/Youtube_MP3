@@ -28,11 +28,11 @@ class SslService {
   }
 
   getHttpsServer(expressApp) {
-    return https.createServer(this.getCredentials, expressApp);
+    return https.createServer(this.getCredentials(), expressApp);
   }
 
   getWssServer() {
-    return https.createServer(this.getCredentials);
+    return https.createServer(this.getCredentials());
   }
 }
 
