@@ -26,7 +26,8 @@ const runApp = () => {
   // direct api endpoint to route
   app.use("/api", expressService.displayRequestInfo, apiRoute);
 
-  // WebSocket servisini Express uygulamanıza ekle
+  // set websocket service
+  serverWebsocketService.startWsServer(app);
   app.set("serverWebsocketService", serverWebsocketService);
   return app;
 };

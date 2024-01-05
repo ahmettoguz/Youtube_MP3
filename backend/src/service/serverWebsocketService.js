@@ -10,8 +10,10 @@ class ServerWebsocketService {
     this.clients = new Map();
     this.currentClientId = null;
     this.currentWs = null;
+  }
 
-    this.wsServer = new WebSocket.Server({ server: sslService.getWssServer() });
+  startWsServer(expressApp) {
+    this.wsServer = new WebSocket.Server({ server: sslService.getWssServer(expressApp) });
     // this.wsServer = new WebSocket.Server({ port: port });
     this.wsServer.on("connection", (ws) => {
       this.currentWs = ws;

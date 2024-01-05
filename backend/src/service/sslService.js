@@ -3,10 +3,6 @@ const fs = require("fs");
 const path = require("path");
 
 class SslService {
-  constructor() {
-    this.expressApp = null;
-  }
-
   getCredentials() {
     try {
       const certificate = fs.readFileSync(
@@ -28,12 +24,11 @@ class SslService {
   }
 
   getHttpsServer(expressApp) {
-    this.expressApp = expressApp;
     return https.createServer(this.getCredentials(), expressApp);
   }
 
-  getWssServer() {
-    return https.createServer(this.getCredentials(), this.expressApp);
+  getWssServer(expressApp) {
+    return https.createServer(this.getCredentials(), expressApp);
   }
 }
 
