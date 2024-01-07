@@ -11,7 +11,7 @@ RUN mkdir -p /etc/nginx/sites-enabled/
 COPY ./default-conf/default.conf /etc/nginx/conf.d/default.conf
 
 # Define an array of domain names
-ENV DOMAIN_NAMES "ahmetproje.com.tr"
+ENV DOMAIN_NAMES "www.ahmetproje.com.tr"
 
 # Copy the Nginx configuration files into the container for the domain name
 RUN for DOMAIN_NAME in $DOMAIN_NAMES; do \
