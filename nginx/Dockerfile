@@ -13,16 +13,21 @@ COPY ./default-conf/default.conf /etc/nginx/conf.d/default.conf
 # Define an array of domain names
 ENV DOMAIN_NAME_1 "ahmetproje.com.tr"
 ENV DOMAIN_NAME_2 "www.ahmetproje.com.tr"
+ENV DOMAIN_NAME_3 "devopscloud.us.to"
 
-# Copy the Nginx configuration files into the container for both domain names
+# Copy the Nginx configuration files into the container with keys
 COPY ./${DOMAIN_NAME_1}/${DOMAIN_NAME_1}.conf /etc/nginx/sites-available/${DOMAIN_NAME_1}.conf
 COPY ./${DOMAIN_NAME_1}/keys/ /etc/nginx/ssl/${DOMAIN_NAME_1}
 RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_1}.conf /etc/nginx/sites-enabled/
 
-# Copy the Nginx configuration files into the container for both domain names
+# Copy the Nginx configuration files into the container with keys
 COPY ./${DOMAIN_NAME_2}/${DOMAIN_NAME_2}.conf /etc/nginx/sites-available/${DOMAIN_NAME_2}.conf
 COPY ./${DOMAIN_NAME_2}/keys/ /etc/nginx/ssl/${DOMAIN_NAME_2}
 RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_2}.conf /etc/nginx/sites-enabled/
+
+# Copy the Nginx configuration files into the container with keys
+COPY ./${DOMAIN_NAME_3}/${DOMAIN_NAME_3}.conf /etc/nginx/sites-available/${DOMAIN_NAME_3}.conf
+RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_3}.conf /etc/nginx/sites-enabled/
 
 # Expose ports 80 and 443
 EXPOSE 80
