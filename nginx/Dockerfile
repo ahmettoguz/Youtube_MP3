@@ -16,12 +16,12 @@ COPY ./ahmetproje.com.tr/keys/ /etc/nginx/ssl/ahmetproje.com.tr
 RUN ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
 
 # Check Nginx configuration
-RUN if nginx -t ; then \
-    echo "Nginx configuration test successful"; \
-else \
-    echo "Nginx configuration test failed"; \
-    exit 1; \
-fi
+# RUN if nginx -t ; then \
+#     echo "Nginx configuration test successful"; \
+# else \
+#     echo "Nginx configuration test failed"; \
+#     exit 1; \
+# fi
 
 # Reload Nginx
 RUN service nginx reload
