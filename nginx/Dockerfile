@@ -11,13 +11,16 @@ RUN mkdir -p /etc/nginx/sites-enabled/
 COPY ./default-conf/default.conf /etc/nginx/conf.d/default.conf
 
 # Define an array of domain names
-ENV DOMAIN_NAMES "www.ahmetproje.com.tr"
+ENV DOMAIN_NAMES="ahmetproje.com.tr www.ahmetproje.com.tr"
+
+# Split the DOMAIN_NAMES variable into an array
+RUN IFS=' ' read -r -a DOMAIN_ARRAY <<< "$DOMAIN_NAMES"
 
 # Copy the Nginx configuration files into the container for the domain name
-RUN for DOMAIN_NAME in $DOMAIN_NAMES; do \
-    COPY ./${DOMAIN_NAME}/${DOMAIN_NAME}.conf /etc/nginx/sites-available/${DOMAIN_NAME}.conf; \
-    COPY ./${DOMAIN_NAME}/keys/ /etc/nginx/ssl/${DOMAIN_NAME}; \
-    ln -s /etc/nginx/sites-available/${DOMAIN_NAME}.conf /etc/nginx/sites-enabled/; \
+RUN for DOMAIN_NAME in "${DOMAIN_ARRAY[@]}"; do \
+   COPY ./${DOMAIN_NAME}/${DOMAIN_NAME}.conf /etc/nginx/sites-available/${DOMAIN_NAME}.conf; \
+   COPY ./${DOMAIN_NAME}/keys/ /etc/nginx/ssl/${DOMAIN_NAME}; \
+   ln -s /etc/nginx/sites-available/${DOMAIN_NAME}.conf /etc/nginx/sites-enabled/; \
 done
 
 # Expose ports 80 and 443
