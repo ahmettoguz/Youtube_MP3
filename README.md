@@ -67,6 +67,8 @@ docker logs nginx-c
 
 docker exec -it nginx-c /bin/bash
 
+exit
+
 ---
 
 curl -I https://ahmetproje.com.tr
