@@ -15,7 +15,7 @@ COPY ./ahmetproje.com.tr/ahmetproje.com.tr.conf /etc/nginx/sites-available/ahmet
 COPY ./ahmetproje.com.tr/keys/ /etc/nginx/ssl/ahmetproje.com.tr
 RUN ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
 
-# Check Nginx configuration
+# # Check Nginx configuration
 # RUN if nginx -t ; then \
 #     echo "Nginx configuration test successful"; \
 # else \
@@ -23,8 +23,8 @@ RUN ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-ena
 #     exit 1; \
 # fi
 
-# Reload Nginx
-RUN service nginx reload
+# # Reload Nginx
+# RUN service nginx reload
 
 # Expose ports 80 and 443
 EXPOSE 80
