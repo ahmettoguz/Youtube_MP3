@@ -69,4 +69,6 @@ docker exec -it nginx-c /bin/bash
 
 ---
 
+curl -I https://ahmetproje.com.tr
+
 curl -I https://www.ahmetproje.com.tr
