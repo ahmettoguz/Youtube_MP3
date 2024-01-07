@@ -10,10 +10,15 @@ RUN mkdir -p /etc/nginx/sites-enabled/
 # Copy the Nginx configuration files into the container
 COPY ./default-conf/default.conf /etc/nginx/conf.d/default.conf
 
-# ahmetproje.com.tr - Copy project port forwarding configurations and keys and create links of the enabled sites
-COPY ./ahmetproje.com.tr/ahmetproje.com.tr.conf /etc/nginx/sites-available/ahmetproje.com.tr.conf
-COPY ./ahmetproje.com.tr/keys/ /etc/nginx/ssl/ahmetproje.com.tr
-RUN ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
+# Define an array of domain names
+ENV DOMAIN_NAMES "ahmetproje.com.tr www.ahmetproje.com.tr"
+
+# Copy the Nginx configuration files into the container for the domain name
+RUN for DOMAIN_NAME in $DOMAIN_NAMES; do \
+    COPY ./${DOMAIN_NAME}/${DOMAIN_NAME}.conf /etc/nginx/sites-available/${DOMAIN_NAME}.conf; \
+    COPY ./${DOMAIN_NAME}/keys/ /etc/nginx/ssl/${DOMAIN_NAME}; \
+    ln -s /etc/nginx/sites-available/${DOMAIN_NAME}.conf /etc/nginx/sites-enabled/; \
+done
 
 # Expose ports 80 and 443
 EXPOSE 80
