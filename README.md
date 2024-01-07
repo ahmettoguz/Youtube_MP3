@@ -62,12 +62,7 @@ docker-compose up -d --build
 
 docker ps -a
 
-docker exec -it nginx-c /bin/bash
-
-bash link.sh
-
-exit
-
-docker ps -a
-
+---
 docker logs nginx-c
+
+docker exec -it nginx-c /bin/bash
