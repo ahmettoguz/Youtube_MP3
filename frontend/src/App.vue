@@ -329,6 +329,9 @@ export default {
     },
 
     async downloadMusic() {
+      // change stage to disable button
+      this.stage = "downloadStarted";
+
       const response = await new Promise((resolve, reject) => {
         axios({
           method: "post",
@@ -360,7 +363,7 @@ export default {
         // Create a download link
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `${this.songName} - ${this.songAuthor}`;
+        link.download = `${this.songName} - ${this.songAuthor}.mp3`;
 
         // Append the link to the document and trigger a click to start the download
         document.body.appendChild(link);

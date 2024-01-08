@@ -67,11 +67,16 @@
 
         <!-- download button -->
         <div
-          v-else-if="stage == 'converted'"
+          v-else-if="stage == 'converted' || stage == 'downloadStarted'"
           class="col12 d-flex justify-content-center mt-2"
         >
-          <button class="btn btn-danger" type="button" @click="downloadMusic">
-            Download
+          <button
+            class="btn btn-danger"
+            type="button"
+            @click="downloadMusic"
+            :disabled="stage == 'downloadStarted'"
+          >
+            {{ stage != "downloadStarted" ? "Download" : "Download Started" }}
           </button>
         </div>
         <!-- download button end -->
@@ -109,7 +114,7 @@ export default {
 
   computed: {
     foundedSongClass() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
+      const acceptedStages = ["videoFound", "converting", "converted", "downloadStarted"];
       const state = acceptedStages.includes(this.stage);
 
       return {
@@ -120,7 +125,7 @@ export default {
     },
 
     foundedSongStyle() {
-      const acceptedStages = ["videoFound", "converting", "converted"];
+      const acceptedStages = ["videoFound", "converting", "converted", "downloadStarted"];
       const state = acceptedStages.includes(this.stage);
 
       return {
