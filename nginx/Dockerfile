@@ -10,10 +10,24 @@ RUN mkdir -p /etc/nginx/sites-enabled/
 # Copy the Nginx configuration files into the container
 COPY ./default-conf/default.conf /etc/nginx/conf.d/default.conf
 
-# ahmetproje.com.tr - Copy project port forwarding configurations and keys and create links of the enabled sites
-COPY ./ahmetproje.com.tr/ahmetproje.com.tr.conf /etc/nginx/sites-available/ahmetproje.com.tr.conf
-COPY ./ahmetproje.com.tr/keys/ /etc/nginx/ssl/ahmetproje.com.tr
-RUN ln -s /etc/nginx/sites-available/ahmetproje.com.tr.conf /etc/nginx/sites-enabled/
+# Define an array of domain names
+ENV DOMAIN_NAME_1 "ahmetproje.com.tr"
+ENV DOMAIN_NAME_2 "www.ahmetproje.com.tr"
+ENV DOMAIN_NAME_3 "devopscloud.us.to"
+
+# Copy the Nginx configuration files into the container with keys
+COPY ./${DOMAIN_NAME_1}/${DOMAIN_NAME_1}.conf /etc/nginx/sites-available/${DOMAIN_NAME_1}.conf
+COPY ./${DOMAIN_NAME_1}/keys/ /etc/nginx/ssl/${DOMAIN_NAME_1}
+RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_1}.conf /etc/nginx/sites-enabled/
+
+# Copy the Nginx configuration files into the container with keys
+COPY ./${DOMAIN_NAME_2}/${DOMAIN_NAME_2}.conf /etc/nginx/sites-available/${DOMAIN_NAME_2}.conf
+COPY ./${DOMAIN_NAME_2}/keys/ /etc/nginx/ssl/${DOMAIN_NAME_2}
+RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_2}.conf /etc/nginx/sites-enabled/
+
+# Copy the Nginx configuration files into the container with keys
+COPY ./${DOMAIN_NAME_3}/${DOMAIN_NAME_3}.conf /etc/nginx/sites-available/${DOMAIN_NAME_3}.conf
+RUN ln -s /etc/nginx/sites-available/${DOMAIN_NAME_3}.conf /etc/nginx/sites-enabled/
 
 # Expose ports 80 and 443
 EXPOSE 80

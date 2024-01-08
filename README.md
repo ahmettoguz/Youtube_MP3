@@ -66,3 +66,11 @@ docker ps -a
 docker logs nginx-c
 
 docker exec -it nginx-c /bin/bash
+
+exit
+
+---
+
+curl -I https://ahmetproje.com.tr
+
+curl -I https://www.ahmetproje.com.tr
