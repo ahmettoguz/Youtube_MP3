@@ -8,7 +8,7 @@
 
 <br/>
 
-## 📚 Table of Contents
+## 🔍 Table of Contents
 
 - [Introduction](#introductionHeader)
 - [Demo](#demoHeader)
@@ -20,15 +20,15 @@
 
 <br/>
 
-<h2 id="demoHeader">⚓ Demo</h2> 
+<h2 id="introductionHeader">📌 Introduction</h2> 
 
-https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0a4-46f8-aeab-bdace80be8d9
+Welcome to Youtube MP3 Converter, where backend and frontend harmonize to offer a streamlined solution for converting YouTube videos to MP3 files with download capability.
 
 <br/>
 
-<h2 id="introductionHeader">📌 Introduction</h2> 
+<h2 id="demoHeader">⚓ Demo</h2> 
 
-Welcome to Youtube MP3 Converter, where backend and frontend harmonize to offer a streamlined solution for converting YouTube videos to MP3 files with convenient download capabilities.
+https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0a4-46f8-aeab-bdace80be8d9
 
 <br/>
 
@@ -82,9 +82,20 @@ Welcome to Youtube MP3 Converter, where backend and frontend harmonize to offer 
 
 <h2 id="featuresHeader">✨ Features</h2> 
 
-* ...
+* User friendly UI design with color modes.
+
+* Clinet can download the converted MP3 file.
   
-* ...
+* Video cover image and details are embedded to the MP3 file.
+
+* The real-time status of MP3 conversion is transferred to the client via both backend and frontend service WebSocket implementation.
+
+* Docker Compose and Docker configurations have been added for the production environment.
+
+* SSL configurations with nginx configurations have been implemented.
+
+* Services have been implemented in a modular fashion.
+
 
 <br/>
 
