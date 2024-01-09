@@ -119,7 +119,8 @@ export default {
   data() {
     return {
       serviceConnection: "initial",
-      videoUrlInput: "https://youtu.be/ZtelRow0qNI",
+      // videoUrlInput: "https://youtu.be/Zte0lRow0qNI",
+      videoUrlInput: "",
       videoUrlInputValidation: "neutral",
       userLocalId: null,
       videoBanner: null,
