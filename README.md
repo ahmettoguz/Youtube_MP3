@@ -8,7 +8,7 @@
 
 <br/>
 
-## Table of Contents
+## 📚 Table of Contents
 
 - [Introduction](#introductionHeader)
 - [Demo](#demoHeader)
@@ -28,7 +28,7 @@ https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0
 
 <h2 id="introductionHeader">📌 Introduction</h2> 
 
-...
+Welcome to Youtube MP3 Converter, where backend and frontend harmonize to offer a streamlined solution for converting YouTube videos to MP3 files with convenient download capabilities.
 
 <br/>
 
@@ -66,11 +66,16 @@ https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0
   
 - [![VUE](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/)
 
+- [![.Env](https://img.shields.io/badge/.ENV-ECD53F.svg?style=for-the-badge&logo=dotenv&logoColor=black)](https://www.ibm.com/docs/bg/aix/7.2?topic=files-env-file)
+  
+- [![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)](https://socket.io/)
+  
 - [![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)](https://jquery.com/)
 
 - ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
   
 - [![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
 
   
 <br/>
@@ -85,9 +90,21 @@ https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0
 
 <h2 id="prerequisitesHeader">🔒 Prerequisites</h2> 
 
-* ...
+### Development Environment
+
+* Nodejs installation
+
+* Vue Cli installation
+
+<br/>
+
+### Production Environment
+
+* Docker installation.
+
+* Domain name.
   
-* ...
+* SSL keys. (SSL keys can be obtained freely from my Certbot project ([SSL](https://github.com/ahmettoguz/Dockerized_Certbot_LetsEncyrpt_SSL)) 
 
 <br/>
 
@@ -103,7 +120,7 @@ git clone https://github.com/ahmettoguz/Youtube_MP3_Converter
 
 ---
 
-### Run backend service
+#### Run backend service
 
 ```bash
 cd ~/Youtube_MP3_Converter/backend
@@ -123,7 +140,7 @@ start frontend with npm run serve
 
 <br/>
 
-## Deployment Environment
+## Production Environment
 
 #### Clone project
 
