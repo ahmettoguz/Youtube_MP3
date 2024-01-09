@@ -441,9 +441,10 @@ export default {
     if (statusServer == false || statusWebsocket == false) {
       this.serviceConnection = false;
     } else {
-      setTimeout(() => {
+      // add delay to see loading animation page.
+      // setTimeout(() => {
         this.serviceConnection = true;
-      }, 1000);
+      // }, 1000);
     }
   },
 };
