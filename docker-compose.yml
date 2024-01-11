@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  backend:
+    build: ./backend
+    image: backend-i
+    container_name: backend-c
+    # volumes:
+    #   - ./backend/src:/app/src
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    restart: always
+
+  frontend:
+    build: ./frontend
+    image: frontend-i
+    container_name: frontend-c
+    # volumes:
+    #   - ./frontend/dist:/usr/share/nginx/html
+    ports:
+      - "8000:80"
+    restart: always
+    # stdin_open: true
+    # tty: true
+    depends_on:
+      - backend
+
+  nginx:
+    build: ./nginx
+    image: nginx-i
+    container_name: nginx-c
+    ports:
+      - "80:80"
+      - "443:443"
+    # volumes:
+    #   - ./nginx/default-conf/default.conf:/etc/nginx/conf.d/default.conf
+
+    #   - ./nginx/ahmetproje.com.tr/ahmetproje.com.tr.conf:/etc/nginx/sites-available/ahmetproje.com.tr.conf
+    #   - ./nginx/ahmetproje.com.tr/keys/:/etc/nginx/ssl/ahmetproje.com.tr
+    depends_on:
+      - frontend
