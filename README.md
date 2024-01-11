@@ -42,7 +42,7 @@ https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0
 
 ### Web Server
 
-- [![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)
+- [![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)clinet
   
 <br/>
 
@@ -84,7 +84,7 @@ https://github.com/ahmettoguz/Youtube_MP3_Converter/assets/101711642/d40b8506-f0
 
 * User friendly UI design with color modes.
 
-* Clinet can download the converted MP3 file.
+* Client can download the converted MP3 file.
   
 * Video cover image and details are embedded to the MP3 file.
 
