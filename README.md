@@ -150,6 +150,11 @@ npm run start
 ```bash
 cd ~/Youtube_MP3_Converter/frontend
 
+```
+
+Configure .env.txt as .env with localhost or network ip.
+
+```bash
 npm i
 
 npm run serve
