@@ -134,7 +134,9 @@ git clone https://github.com/ahmettoguz/Youtube_MP3_Converter
 #### Run backend service
 
 ```bash
-cd ~/Youtube_MP3_Converter/backend
+cd ~/Youtube_MP3_Converter/backend/src/keys
+
+bash generateKeys.sh
 
 npm i
 
