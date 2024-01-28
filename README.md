@@ -136,6 +136,8 @@ git clone https://github.com/ahmettoguz/Youtube_MP3_Converter
 ```bash
 cd ~/Youtube_MP3_Converter/backend
 
+npm i
+
 npm run start
 ```
 
