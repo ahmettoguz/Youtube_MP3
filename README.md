@@ -150,7 +150,9 @@ npm run start
 ```bash
 cd ~/Youtube_MP3_Converter/frontend
 
-start frontend with npm run serve
+npm i
+
+npm run serve
 ```
 
 <br/>
