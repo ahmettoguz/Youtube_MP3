@@ -86,6 +86,7 @@ class YtService {
         url: this.videoUrl,
         itag: 140,
         directoryDownload: filePath,
+        title: "music",
       },
       this.onConverting,
       this.onCovertFinished
